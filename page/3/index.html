@@ -236,7 +236,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/04/19/sql%E6%B3%A8%E5%85%A5/sql/" target="_self">
         <div>
-          sql注入联合查询（union注入）报错注入 group by 重复键冲  and (select 1 from (select count(*),concat((select 查询的内容 from information_schema.tables limit 0,1),floor(rand()*2))x from information_schema.tables group by x)a)
+          sql注入数字型：当输入的参数为整形时，若存在注入漏洞，则是数字型注入。 如：https://blog.csdn.net/aboutus.php?id=1 此时后台语句：$sql&#x3D;“SELECT 123 FROM abc WHERE id&#x3D;’1 ‘“ 检测方法：URL输入 and 1&#x3D;1 &#x2F; and 1&#x3D;2 报错则说明有注入 字符型当输入参数为字符
         </div>
       </a>
 
